@@ -17,6 +17,8 @@ public class ShopServiceImpl implements ShopService{
 	@Autowired
 	ShopMapper mapper;
 	
+	// 테스트 커밋
+	
 	public ShopServiceImpl() {
 		System.out.println("shop ser 실행");
 	}
