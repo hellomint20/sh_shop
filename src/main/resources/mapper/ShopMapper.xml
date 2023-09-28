@@ -2,5 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.demo.mapper.ShopMapper">
-
+	<resultMap id="member" type="com.example.demo.DTO.ShMemberDTO">
+		<id property="memberId" column="member_id"/>
+		<result property="memberPw" column="member_pw"/>
+		<result property="shopNo" column="shop_no"/>
+		<result property="authType" column="auth_type"/>
+		<result property="memberName" column="member_name"/>
+	</resultMap>
+	
+	<select id="loginChk" resultMap="member">
+		select * from sh_member where id=#{id}
+	</select>
+	
 </mapper>
