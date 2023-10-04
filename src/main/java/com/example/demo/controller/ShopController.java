@@ -1,9 +1,5 @@
 package com.example.demo.controller;
 
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,22 +20,6 @@ public class ShopController {
 	public String main() {
 		return "shop/main";
 	}
-	@GetMapping("login")
-	public String login() {
-		return "shop/login";
-	}
-	@PostMapping("login_chk")
-	public void loginChk(@RequestParam String id, @RequestParam String pw,
-							HttpServletResponse res) throws Exception{
-		String msg = ss.loginChk(id, pw);
-		res.setContentType("text/html; charset=utf-8");
-		PrintWriter out = res.getWriter();
-		out.print(msg);
-	}
-	@GetMapping("successLogin")
-	public String successLogin() {
-		return "shop/successLogin";
-	}
 
 	@GetMapping("sell")
 	public String sell() {
@@ -56,14 +36,5 @@ public class ShopController {
 	@GetMapping("inventoryStatus")
 	public String inventoryStatus() {
 		return "shop/inventoryStatus";
-	}
-	@GetMapping("branchInfo")
-	public String branchInfo() {
-		System.out.println("branchInfo");
-		return "shop/branchInfo";
-	}
-	@GetMapping("memberInfo")
-	public String memberInfo() {
-		return "shop/memberInfo";
 	}
 }

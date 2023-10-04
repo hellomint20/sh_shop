@@ -10,8 +10,13 @@
 		<result property="memberName" column="member_name"/>
 	</resultMap>
 	
-	<select id="loginChk" resultMap="member">
+	<select id="getInfo" resultMap="member">
 		select * from sh_member where id=#{id}
 	</select>
+	
+	<insert id="register">
+		insert into sh_member(member_id, member_pw, member_name, shop_no, auth_type)
+		values(#{memberId}, #{memberPw}, #{memberName}, #{shopNo}, #{authType})
+	</insert>
 	
 </mapper>
