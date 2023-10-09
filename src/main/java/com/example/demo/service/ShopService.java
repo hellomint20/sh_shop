@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.DTO.ShMemberDTO;
+import com.example.demo.DTO.ShProductDTO;
 import com.example.demo.DTO.ShShopDTO;
 
 public interface ShopService {
@@ -8,4 +9,5 @@ public interface ShopService {
 	public String register(ShMemberDTO dto);
 	public String logout();
 	public String branchRegister(ShShopDTO dto);
+	public String productRegister(ShProductDTO dto);
 }

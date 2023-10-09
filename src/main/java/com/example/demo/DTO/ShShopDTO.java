@@ -8,6 +8,7 @@ public class ShShopDTO {
 	String shopAddr = "";
 	String managerName = "";
 	String managerHp = "";
+	
 	public String getShopNo() {
 		return shopNo;
 	}

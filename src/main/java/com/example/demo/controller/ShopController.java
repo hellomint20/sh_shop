@@ -20,15 +20,6 @@ public class ShopController {
 	public String main() {
 		return "shop/main";
 	}
-
-	@GetMapping("sell")
-	public String sell() {
-		return "shop/sell";
-	}
-	@PostMapping("sell")
-	public void sell(@RequestParam String sellprocess) {
-		System.out.println("con sell 값 : "+sellprocess);
-	}
 	@GetMapping("salesStatus")
 	public String salesStatus() {
 		return "shop/salesStatus";
@@ -36,5 +27,9 @@ public class ShopController {
 	@GetMapping("inventoryStatus")
 	public String inventoryStatus() {
 		return "shop/inventoryStatus";
+	}
+	@GetMapping("test")
+	public String test() {
+		return "shop/test";
 	}
 }

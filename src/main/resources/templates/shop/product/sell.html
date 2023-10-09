@@ -4,9 +4,9 @@
 	
 	<main layout:fragment="content">
 		<div class="container-fluid px-4">
-			<h1 class="mt-4">지점 정보</h1>
+			<h1 class="mt-4">판매 등록</h1>
 			<ol class="breadcrumb mb-4">
-				<li class="breadcrumb-item"><a href="branchRegister">지점 등록</a></li>
+				<li class="breadcrumb-item"><a href="#">???</a></li>
 				<li class="breadcrumb-item active">Tables</li>
 			</ol>
 			<div class="card mb-4">
@@ -14,7 +14,6 @@
 					DataTables is a third party plugin that is used to generate the demo table below. For more information
 					about DataTables, please visit the
 					<a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-					.
 				</div>
 			</div>
 			<div class="card mb-4">
@@ -26,12 +25,12 @@
 					<table id="datatablesSimple">
 						<thead>
 							<tr>
-								<th>Name</th>
-								<th>Position</th>
-								<th>Office</th>
-								<th>Age</th>
-								<th>Start date</th>
-								<th>Salary</th>
+								<th>item_no</th>
+								<th>item_name</th>
+								<th>item_price</th>
+								<th>item_category</th>
+								<th>item_date</th>
+								<th>item_state</th>
 							</tr>
 						</thead>
 						<tfoot>
@@ -46,12 +45,12 @@
 						</tfoot>
 						<tbody>
 							<tr>
-								<td>서울점</td>
-								<td>서울시</td>
-								<td>02-1111-1111</td>
-								<td>kim</td>
-								<td>2023/09/27</td>
-								<td>????</td>
+								<td><input size="45" type="text" placeholder="상품번호 입력" name="#"></td>
+								<td>상품명</td>
+								<td><input size="10" type="text" placeholder="상품 수량" name="#"></td>
+								<td>카테고리</td>
+								<td>등록날짜</td>
+								<td>상태</td>
 							</tr>
 						</tbody>
 					</table>

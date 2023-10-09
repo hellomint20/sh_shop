@@ -4,9 +4,9 @@
 	
 	<main layout:fragment="content">
 		<div class="container-fluid px-4">
-			<h1 class="mt-4">지점 정보</h1>
+			<h1 class="mt-4">재고 목록</h1>
 			<ol class="breadcrumb mb-4">
-				<li class="breadcrumb-item"><a href="branchRegister">지점 등록</a></li>
+				<li class="breadcrumb-item"><a href="productRegister">재고 등록</a></li>
 				<li class="breadcrumb-item active">Tables</li>
 			</ol>
 			<div class="card mb-4">
@@ -26,6 +26,16 @@
 					<table id="datatablesSimple">
 						<thead>
 							<tr>
+								<th>item_no</th>
+								<th>item_name</th>
+								<th>item_price</th>
+								<th>item_category</th>
+								<th>item_date</th>
+								<th>item_state</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
 								<th>Name</th>
 								<th>Position</th>
 								<th>Office</th>
@@ -33,25 +43,15 @@
 								<th>Start date</th>
 								<th>Salary</th>
 							</tr>
-						</thead>
-						<tfoot>
-							<tr>
-								<th>Name</th>
-								<th>Addr</th>
-								<th>Tel</th>
-								<th>manager</th>
-								<th>Start date</th>
-								<th>????</th>
-							</tr>
 						</tfoot>
 						<tbody>
 							<tr>
-								<td>서울점</td>
-								<td>서울시</td>
-								<td>02-1111-1111</td>
-								<td>kim</td>
-								<td>2023/09/27</td>
-								<td>????</td>
+								<td>상품번호</td>
+								<td>상품명</td>
+								<td>상품가격</td>
+								<td>카테고리</td>
+								<td>등록날짜</td>
+								<td>상태</td>
 							</tr>
 						</tbody>
 					</table>

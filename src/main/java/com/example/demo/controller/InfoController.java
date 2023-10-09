@@ -33,11 +33,11 @@ public class InfoController {
 		return "shop/info/branchRegister";
 	}
 	@PostMapping("branchRegister")
-	public void branchRegister(ShShopDTO dto, HttpServletResponse res) {
-		//String msg = ss.branchRegister(dto);
-		//res.setContentType("text/html; charset=utf-8");
-		//PrintWriter out = res.getWriter();
-		//out.print(msg);
+	public void branchRegister(ShShopDTO dto, HttpServletResponse res) throws Exception {
+		String msg = ss.branchRegister(dto);
+		res.setContentType("text/html; charset=utf-8");
+		PrintWriter out = res.getWriter();
+		out.print(msg);
 		System.out.println(dto.getShopName());
 		System.out.println(dto.getShopTel());
 		System.out.println(dto.getShopAddr());
