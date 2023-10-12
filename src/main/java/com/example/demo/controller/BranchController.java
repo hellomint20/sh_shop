@@ -11,22 +11,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.DTO.ShShopDTO;
-import com.example.demo.service.ShopService;
+import com.example.demo.service.branch.BranchService;
 
 @Controller
 @RequestMapping("shop")
-public class InfoController {
-	
+public class BranchController {
 	@Autowired
-	ShopService ss;
+	BranchService bs;
 
 	@GetMapping("branchInfo")
 	public String branchInfo() {
 		return "shop/info/branchInfo";
-	}
-	@GetMapping("memberInfo")
-	public String memberInfo() {
-		return "shop/info/memberInfo";
 	}
 	@GetMapping("branchRegister")
 	public String branchRegister() {
@@ -34,7 +29,7 @@ public class InfoController {
 	}
 	@PostMapping("branchRegister")
 	public void branchRegister(ShShopDTO dto, HttpServletResponse res) throws Exception {
-		String msg = ss.branchRegister(dto);
+		String msg = bs.branchRegister(dto);
 		res.setContentType("text/html; charset=utf-8");
 		PrintWriter out = res.getWriter();
 		out.print(msg);

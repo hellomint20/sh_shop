@@ -11,7 +11,7 @@
 	</resultMap>
 	
 	<select id="getInfo" resultMap="member">
-		select * from sh_member where id=#{id}
+		select * from sh_member where member_id=#{id}
 	</select>
 	
 	<insert id="register">

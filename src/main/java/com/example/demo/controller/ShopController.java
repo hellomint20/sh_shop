@@ -7,15 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.service.ShopService;
 
 @Controller
 @RequestMapping("shop")
 public class ShopController {
 	
-	@Autowired
-	ShopService ss;
-
 	@GetMapping("main")
 	public String main() {
 		return "shop/main";
@@ -27,9 +23,5 @@ public class ShopController {
 	@GetMapping("inventoryStatus")
 	public String inventoryStatus() {
 		return "shop/inventoryStatus";
-	}
-	@GetMapping("test")
-	public String test() {
-		return "shop/test";
 	}
 }

@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.DTO.ShProductDTO;
-import com.example.demo.service.ShopService;
+import com.example.demo.service.product.ProductService;
 
 @Controller
 @RequestMapping("shop")
 public class ProductController {
 	
 	@Autowired
-	ShopService ss;
+	ProductService ps;
 
-	@GetMapping("sell")
+	@GetMapping("sellRefund")
 	public String sell() {
-		return "shop/product/sell";
+		return "shop/product/sellRefund";
 	}
 	@GetMapping("productInfo")
 	public String productInfo() {
@@ -40,10 +40,9 @@ public class ProductController {
 		System.out.println(dto.getItemCategory());
 		System.out.println(dto.getItemState());
 		
-		String msg = ss.productRegister(dto);
+		String msg = ps.productRegister(dto);
 		res.setContentType("text/html; charset=utf-8");
 		PrintWriter out = res.getWriter();
 		out.print(msg);
-		
 	}
 }
