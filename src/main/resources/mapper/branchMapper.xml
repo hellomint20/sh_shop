@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.branchMapper">	
+	<resultMap type="com.example.demo.DTO.ShShopDTO" id="shop">
+		<id property="shopNo" column="shop_no"></id>
+		<result property="ShopName" column="shop_name"/>
+		<result property="shopTel" column="shop_tel"/>
+		<result property="shopAddr" column="shop_addr"/>
+		<result property="managerName" column="manager_name"/>
+		<result property="managerHp" column="manager_hp"/>
+	</resultMap>
+	
+	<insert id="branchRegister">
+		insert into sh_shop(shop_no, shop_name, shop_tel, shop_addr, manager_name, manager_hp) 
+		values(#{shopNo}, #{ShopName}, #{shopTel}, #{shopAddr}, #{managerName}, #{managerHp})
+	</insert>
+
+</mapper>

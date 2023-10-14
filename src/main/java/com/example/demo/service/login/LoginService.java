@@ -1,9 +1,10 @@
 package com.example.demo.service.login;
 
-import com.example.demo.DTO.ShMemberDTO;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 public interface LoginService {
-	public String loginChk(String id, String pw);
-	public String register(ShMemberDTO dto);
+	public String loginChk(Map<String, Object> map, HttpSession session);
 	public String logout();
 }

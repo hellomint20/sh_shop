@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.ProductMapper">
+
+	<resultMap type="com.example.demo.DTO.ShProductDTO" id="product">
+	
+	</resultMap>
+	
+	<select id="productAllList" resultType="map">
+		select * from sh_product
+	</select>
+	
+	<select id="productList" resultType="map">
+		select * from sh_stock where  shop_no=#{shopNo}
+	</select>
+	
+	<select id="productgetList" resultType="map">
+		select * from sh_product where  item_no=#{itemNo}
+	</select>
+	
+	<insert id="productRegister">
+		insert into sh_product (item_no, item_name, item_price, item_category, item_desc, item_state)
+		values(#{itemNo}, #{itemName}, #{itemPrice}, #{itemCategory}, #{itemDesc}, #{itemState})
+	</insert>
+
+</mapper>

@@ -2,12 +2,11 @@ package com.example.demo.service.login.impl;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.example.demo.DTO.ShMemberDTO;
 import com.example.demo.common.GetMessage;
-import com.example.demo.common.Session;
 import com.example.demo.mapper.MemberMapper;
 import com.example.demo.service.login.LoginService;
 
@@ -20,16 +19,16 @@ public class LoginServiceImpl implements LoginService {
 	String msg = ""; // alert
 	String url = ""; // url
 	
-	public String loginChk(String id, String pw) {
-		ShMemberDTO dto = mapper.getInfo(id);
-
-		if(dto != null) {
-			if(dto.getMemberPw().equals(pw)) { //로그인 성공
-				Map<String, Object> map = Session.loginsession(dto);
-				System.out.println("service"+map);
+	public String loginChk(Map<String, Object> map, HttpSession session) {
+		Map<String, Object> mapInfo = mapper.getInfo(map.get("id").toString());
+		if(mapInfo != null) {
+			if(mapInfo.get("member_pw").equals(map.get("pw"))) { //로그인 성공
+				session.setAttribute("memberId", mapInfo.get("member_id"));
+				session.setAttribute("authType", mapInfo.get("auth_type"));
+				session.setAttribute("memberName", mapInfo.get("member_name"));
+				session.setAttribute("shopNo", mapInfo.get("shop_no"));
 				msg = "로그인 성공";
-				//url = "/shop/successLogin/"+id;
-				url = "/shop/successLogin/"+map;
+				url = "/shop/";
 			}else { //비밀번호 틀립
 				msg = "비밀번호가 틀림";
 				url = "/shop/login";
@@ -41,22 +40,9 @@ public class LoginServiceImpl implements LoginService {
 		
 		return GetMessage.getMessage(msg, url);
 	}
-	public String register(ShMemberDTO dto) {
-		int result = 0;
-		result = mapper.register(dto);
-		
-		if(result == 1) { //회원가입 성공
-			msg = "회원가입 성공";
-			url = "/shop/login";
-		}else { //회원가입 실패
-			msg = "회원가입 실패";
-			url = "/shop/login";
-		}
-		return GetMessage.getMessage(msg, url);
-	}
 	public String logout() {
 		msg = "로그아웃 되었습니다";
-		url = "/shop/main";
+		url = "/shop/";
 		return GetMessage.getMessage(msg, url);
 	}
 }

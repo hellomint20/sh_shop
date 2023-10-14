@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.MemberMapper">
+	
+	<select id="getInfo"  resultType="map">
+		select * from sh_member where member_id=#{id}
+	</select>
+	
+	<select id="getShopNo" resultType="map">
+		select * from sh_shop where shop_name = #{shopName}
+	</select>
+	
+	<select id="getShopName" resultType="map">
+		select * from sh_shop where shop_no = #{shopNo}
+	</select>
+	
+	<insert id="register">
+		insert into sh_member(member_id, member_pw, member_name, shop_no, auth_type)
+		values(#{memberId}, #{memberPw}, #{memberName}, #{shopNo}, #{authType})
+	</insert>
+	
+	<update id="memberModify">
+		update sh_member set member_name=#{memberName}, shop_no=#{shopNo} where member_id=#{memberId}
+	</update>
+	
+	<delete id="memberDelete">
+		delete from sh_member where member_id=#{id}
+	</delete>
+</mapper>

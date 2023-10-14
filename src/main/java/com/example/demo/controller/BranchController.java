@@ -14,20 +14,24 @@ import com.example.demo.DTO.ShShopDTO;
 import com.example.demo.service.branch.BranchService;
 
 @Controller
-@RequestMapping("shop")
 public class BranchController {
 	@Autowired
 	BranchService bs;
 
-	@GetMapping("branchInfo")
+	@GetMapping("branchList") //지점 목록
+	public String branchList() {
+		return "shop/branch/branchList";
+	}
+	
+	@GetMapping("branchInfo") //지점 정보
 	public String branchInfo() {
-		return "shop/info/branchInfo";
+		return "shop/branch/branchInfo";
 	}
-	@GetMapping("branchRegister")
+	@GetMapping("branchRegister") //지점 등록
 	public String branchRegister() {
-		return "shop/info/branchRegister";
+		return "shop/branch/branchRegister";
 	}
-	@PostMapping("branchRegister")
+	@PostMapping("branchRegister") //지점 DB 등록
 	public void branchRegister(ShShopDTO dto, HttpServletResponse res) throws Exception {
 		String msg = bs.branchRegister(dto);
 		res.setContentType("text/html; charset=utf-8");

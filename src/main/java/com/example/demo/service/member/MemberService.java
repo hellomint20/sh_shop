@@ -1,7 +1,14 @@
 package com.example.demo.service.member;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import com.example.demo.DTO.ShMemberDTO;
 
 public interface MemberService {
-	public ShMemberDTO memberInfo(String id);
+	public String register(ShMemberDTO dto);
+	public Map<String, Object> memberInfo(String id);
+	public String memberModify(ShMemberDTO dto);
+	public String memberDelete(HttpSession session);
 }

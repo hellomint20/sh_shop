@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+
+<main layout:fragment="content">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-7">
+				<div class="border-0 rounded-lg mt-5">
+					<div class="card-header">
+						<h3 class="text-center font-weight-light my-4">개인정보</h3>
+					</div>
+					<div class="card-body" id="memberInfo">
+						<div class="row mb-3">
+							<div class="col-md-6">
+								<div class="form-floating mb-3 mb-md-0">
+									<input class="form-control" id="memberInfoId" name="memberId" type="text"
+										th:value="${dto['member_id']}" readonly />
+									<label for="memberInfoId">아이디</label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-floating">
+									<input class="form-control" id="memberInfoPw" name="memberPw" type="password"
+										th:value="${dto['member_pw']}" readonly />
+									<label for="memberInfoPw">비밀번호</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-floating mb-3">
+							<input class="form-control" id="memberInfoName" type="text" name="memberName"
+								th:value="${dto['member_name']}" readonly />
+							<label for="memberInfoName">이름</label>
+						</div>
+						<div class="row mb-3">
+							<div class="col-md-6">
+								<div class="form-floating mb-3 mb-md-0">
+									<input class="form-control" id="memberInfoShopName" name="shopNo" type="text"
+										th:value="${dto['shopName']}" readonly />
+									<label for="memberInfoShopName">지점명</label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-floating mb-3 mb-md-0"
+									th:if="${dto['auth_type'].toString().equals('00')}">
+									<input class="form-control" id="memberInfoAuthType" name="authType" type="text"
+										value="관리자" readonly />
+									<label for="memberInfoAuthType">관리자 등급</label>
+								</div>
+								<div class="form-floating mb-3 mb-md-0"
+									th:if="${dto['auth_type'].toString().equals('01')}">
+									<input class="form-control" id="memberInfoAuthType" name="authType" type="text"
+										value="매니저" readonly />
+									<label for="memberInfoAuthType">관리자 등급</label>
+								</div>
+								<div class="form-floating mb-3 mb-md-0"
+									th:if="${dto['auth_type'].toString().equals('02')}">
+									<input class="form-control" id="memberInfoAuthType" name="authType" type="text"
+										value="직원" readonly />
+									<label for="memberInfoAuthType">관리자 등급</label>
+								</div>
+							</div>
+						</div>
+						<div class="mt-4 mb-0">
+							<div class="d-grid"><input class="btn btn-info btn-block" onclick="memberModify()" value="정보수정">
+							</div>
+							<div class="d-grid"><button class="btn btn-danger btn-block" onclick="location.href='memberDelete'" >탈퇴하기</button>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer text-center py-3">
+						<div class="small"><a href="/shop">메인으로 이동</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+
+</html>
