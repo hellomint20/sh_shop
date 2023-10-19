@@ -38,6 +38,25 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return GetMessage.getMessage(msg, url);
 	}
+	
+	public String register2(Map<String, Object> map) {
+		System.out.println(map);
+		Map<String, Object> shopNo = mapper.getShopNo(map.get("shopName").toString());
+		System.out.println(shopNo);
+		map.put("shopNo", shopNo.get("shop_no").toString());
+		System.out.println(map);
+		int result = 0;
+		result = mapper.register2(map);
+		
+		if(result == 1) { //회원가입 성공
+			msg = "회원가입 성공";
+			url = "/shop/login";
+		}else { //회원가입 실패
+			msg = "회원가입 실패";
+			url = "/shop/login";
+		}
+		return GetMessage.getMessage(msg, url);
+	}
 
 	public Map<String, Object> memberInfo(String id) {
 		Map<String, Object> map = mapper.getInfo(id);

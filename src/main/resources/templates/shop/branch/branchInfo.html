@@ -3,5 +3,62 @@
 	layout:decorate="~{layout/layout}">
 	
 	<main layout:fragment="content">
+		<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-7">
+				<div class="border-0 rounded-lg mt-5">
+					<div class="card-header">
+						<h3 class="text-center font-weight-light my-4"><span th:text="${branchInfo['shop_name']}"></span>&nbsp; 지점 정보</h3>
+					</div>
+					<div class="card-body" id="branchInfo">
+						<div class="row mb-3">
+							<div class="col-md-6">
+								<div class="form-floating mb-3 mb-md-0">
+									<input class="form-control" id="branchInfoName" name="shopName" type="text"
+										th:value="${branchInfo['shop_name']}" readonly />
+									<label for="branchInfoName">지점명</label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-floating">
+									<input class="form-control" id="branchInfoTel" name="shopTel" type="text"
+										th:value="${branchInfo['shop_tel']}" readonly />
+									<label for="branchInfoTel">전화번호</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-floating mb-3">
+							<input class="form-control" id="branchInfoAddr" type="text" name="shopAddr"
+								th:value="${branchInfo['shop_addr']}" readonly />
+							<label for="branchInfoAddr">주소</label>
+						</div>
+						<div class="row mb-3">
+							<div class="col-md-6">
+								<div class="form-floating mb-3 mb-md-0">
+									<input class="form-control" id="branchInfoManager" name="managerName" type="text"
+										th:value="${branchInfo['manager_name']}" readonly />
+									<label for="branchInfoManager">매니저</label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-floating mb-3 mb-md-0">
+									<input class="form-control" id="branchInfoManagerTel" name="managerHp" type="text"
+										th:value="${branchInfo['manager_hp']}" readonly />
+									<label for="branchInfoManagerTel">매니저 전화번호</label>
+								</div>
+							</div>
+						</div>
+						<div class="mt-4 mb-0">
+							<div class="d-grid"><input class="btn btn-info btn-block" onclick="branchModify()" value="정보수정">
+							</div>
+						</div>
+					</div>
+					<div class="card-footer text-center py-3">
+						<div class="small"><a href="/shop">메인으로 이동</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	</main>
 </html>

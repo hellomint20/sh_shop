@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.demo.mapper.branchMapper">	
+<mapper namespace="com.example.demo.mapper.BranchMapper">	
 	<resultMap type="com.example.demo.DTO.ShShopDTO" id="shop">
 		<id property="shopNo" column="shop_no"></id>
 		<result property="ShopName" column="shop_name"/>
@@ -11,9 +11,26 @@
 		<result property="managerHp" column="manager_hp"/>
 	</resultMap>
 	
+	<select id="branchList" resultType="map">
+		select * from sh_shop
+	</select>
+	
+	<select id="branchShopNo" resultType="int">
+		select substr(max(A.shop_no), -4, 4) from sh_shop A;
+	</select>
+	
 	<insert id="branchRegister">
 		insert into sh_shop(shop_no, shop_name, shop_tel, shop_addr, manager_name, manager_hp) 
-		values(#{shopNo}, #{ShopName}, #{shopTel}, #{shopAddr}, #{managerName}, #{managerHp})
+		values(#{shopNo}, #{shopName}, #{shopTel}, #{shopAddr}, #{managerName}, #{managerHp})
 	</insert>
+	
+	<select id="branchInfo" resultType="map">
+		select * from sh_shop where shop_no=${shopNo}
+	</select>
+	
+	<update id="branchModify">
+		update sh_shop set shop_name=#{shopName}, shop_tel=#{shopTel}, shop_addr=#{shopAddr}, 
+		manager_name=#{managerName}, manager_hp=#{managerHp} where shop_no=#{shopNo}
+	</update>
 
 </mapper>

@@ -2,6 +2,8 @@ package com.example.demo.service.branch.impl;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,12 @@ public class BranchServiceImpl implements BranchService{
 	String msg = ""; // alert
 	String url = ""; // url
 	
-	public String branchRegister(ShShopDTO dto) {
+	public List<Map<String, Object>> branchList(){
+		List<Map<String, Object>> map = mapper.branchList();
+		return map;
+	}
+	
+	public String branchRegister(Map<String, Object> map) {
 		// 현재 날짜 구하기
         LocalDate now = LocalDate.now();
         // 포맷 정의
@@ -31,19 +38,34 @@ public class BranchServiceImpl implements BranchService{
         System.out.println(formatedNow); //202310
         
         //☆지점번호 가져오기
-        
-		//지점 번호 넣어주고 지점 번호까지 dto로 넘겨준다 ex) 2023120002
-		//dto.setShopNo() 
-        
-        
+        int shopNo = mapper.branchShopNo()+1;
+        String newShopNo = formatedNow+String.format("%04d", shopNo);
+        map.put("shopNo", newShopNo);
+
 		int result = 0;
-		//result = mapper.branchRegister(dto);
+		result = mapper.branchRegister(map);
 		
 		if(result == 1) { //지점 등록 성공
 			msg = "지점 등록 성공";
-			url = "/shop/branchInfo";
+			url = "/shop/branchList";
 		}else { //지점 등록 실패
 			msg = "지점 등록 실패";
+			url = "/shop/branchList"; ///??? 쓰던 내용으로 돌려야 하나?
+		}
+		return GetMessage.getMessage(msg, url);
+	}
+	public Map<String, Object> branchInfo(String shopNo){
+		return mapper.branchInfo(shopNo);
+	}
+	public String branchModify(Map<String, Object> map) {
+		int result = 0;
+		result = mapper.branchModify(map);
+		
+		if(result == 1) { //지점 수정 성공
+			msg = "지점 정보 수정 성공";
+			url = "/shop/branchInfo";
+		}else { //지점 수정 실패
+			msg = "지점 정보 수정 실패";
 			url = "/shop/branchInfo"; ///??? 쓰던 내용으로 돌려야 하나?
 		}
 		return GetMessage.getMessage(msg, url);

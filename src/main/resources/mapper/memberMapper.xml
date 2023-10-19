@@ -20,6 +20,11 @@
 		values(#{memberId}, #{memberPw}, #{memberName}, #{shopNo}, #{authType})
 	</insert>
 	
+	<insert id="register2">
+		insert into sh_member(member_id, member_pw, member_name, shop_no, auth_type)
+		values(#{memberId}, #{memberPw}, #{memberName}, #{shopNo}, #{authType})
+	</insert>
+	
 	<update id="memberModify">
 		update sh_member set member_name=#{memberName}, shop_no=#{shopNo} where member_id=#{memberId}
 	</update>
