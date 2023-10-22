@@ -58,6 +58,7 @@ public class BranchServiceImpl implements BranchService{
 		return mapper.branchInfo(shopNo);
 	}
 	public String branchModify(Map<String, Object> map) {
+		System.out.println(map);
 		int result = 0;
 		result = mapper.branchModify(map);
 		

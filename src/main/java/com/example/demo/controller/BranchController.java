@@ -49,7 +49,9 @@ public class BranchController {
 	}
 
 	@RequestMapping("branchModify") //지점 DB 등록
-	public void branchModify(@RequestParam Map<String, Object> map, HttpServletResponse res) throws Exception {
+	public void branchModify(@RequestParam Map<String, Object> map, HttpSession session, HttpServletResponse res) throws Exception {
+		System.out.println(map);
+		map.put("shopNo", session.getAttribute("shopNo"));
 		String msg = bs.branchModify(map);
 		res.setContentType("text/html; charset=utf-8");
 		PrintWriter out = res.getWriter();

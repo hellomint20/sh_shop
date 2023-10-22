@@ -1,6 +1,7 @@
 package com.example.demo.service.product.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,8 @@ public class ProductServiceImpl implements ProductService{
 	String msg = ""; // alert
 	String url = ""; // url
 	
-	public Map<String, Object> productAllList() { //전체 재고 목록
-		Map<String, Object> list = mapper.productAllList();
+	public List<Map<String, Object>> productAllList() { //전체 재고 목록
+		List<Map<String, Object>> list = mapper.productAllList();
 		return list;
 	}
 	

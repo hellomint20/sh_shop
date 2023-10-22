@@ -11,6 +11,7 @@
 	<title>Dashboard - SB Admin</title>
 
 	<link href="/shop/css/styles.css" rel="stylesheet" />
+	<link href="/shop/css/branchList.css" rel="stylesheet" />
 
 	<script src="/shop/js/all.js" crossorigin="anonymous"></script>
 	<script src="/shop/js/member.js"></script>
@@ -22,8 +23,8 @@
 		<!-- Navbar Brand-->
 		<a class="navbar-brand ps-3" href="/shop">SH shop</a>
 		<!-- Sidebar Toggle-->
-		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
-				class="fas fa-bars"></i></button>
+		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+			<i class="fas fa-bars"></i></button>
 		<!-- Navbar Search-->
 		<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
 			<div class="input-group">
@@ -57,7 +58,7 @@
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">Mode</div>
 						<a class="nav-link" href="#">
-							<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
 							<span th:if="${session.authType == null}"> Guest </span>
 							<span th:if="${session.authType == '00'}"> admin </span>
 							<span th:if="${session.authType == '01'}"> manager </span>
@@ -66,20 +67,24 @@
 						<div class="sb-sidenav-menu-heading">Menu</div>
 						<div class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
 							aria-expanded="false" aria-controls="collapseLayouts">
-							<div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-file-invoice"></i></div>
 							product
 							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 						</div>
 						<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="productList">재고(각 지점 조회)</a>
-								<a class="nav-link" href="sellRefund">sell/refund(각 지점 판매/환불)</a>
+								<a class="nav-link" href="productList">
+									<div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+									재고(각 지점 조회)</a>
+								<a class="nav-link" href="sellRefund">
+									<div class="sb-nav-link-icon"><i class="fa-solid fa-coins"></i></div>
+									sell/refund(각 지점 판매/환불)</a>
 							</nav>
 						</div>
 						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
 							aria-expanded="false" aria-controls="collapsePages">
-							<div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-pen-to-square"></i></div>
 							management
 							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 						</a>
@@ -89,6 +94,7 @@
 								<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
 									data-bs-target="#pagesCollapseAuth" aria-expanded="false"
 									aria-controls="pagesCollapseAuth">
+									<div class="sb-nav-link-icon"><i class="fa-solid fa-chart-pie"></i></div>
 									Sales Status
 									<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 								</a>
@@ -101,24 +107,26 @@
 									</nav>
 								</div>
 								<a class="nav-link" href="branchInfo">
-									<div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+									<div class="sb-nav-link-icon"><i class="fa-solid fa-circle-info"></i></div>
 									지점 정보 확인
 								</a>
 							</nav>
 						</div>
+					<div th:if="${session.authType == '00'}">
 						<div class="sb-sidenav-menu-heading">admin</div>
 						<a class="nav-link" href="productAllList">
-							<div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
 							전체 재고 확인 및 등록
 						</a>
 						<a class="nav-link" href="branchList">
-							<div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
 							지점별 정보 확인
 						</a>
 						<a class="nav-link" href="#">
-							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+							<div class="sb-nav-link-icon"><i class="fa-solid fa-chart-line"></i></div>
 							지점별 매출 확인
 						</a>
+						</div>
 					</div>
 				</div>
 				<div class="sb-sidenav-footer">

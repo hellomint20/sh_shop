@@ -9,8 +9,8 @@
 			<div class="card mb-4">
 				<div class="card-header">
 					<i class="fas fa-table me-1"></i>
-					<a href="branchRegister">지점 등록</a>
-					<a href="branchRegister">지점 삭제</a>
+					<a href="branchRegister" id="branchRegister">지점 등록</a>
+					<a href="#">지점 삭제</a>
 				</div>
 				<div class="card-body">
 					<table id="datatablesSimple">
@@ -22,6 +22,7 @@
 								<th>지점 주소</th>
 								<th>매니저 이름</th>
 								<th>매니저 전화번호</th>
+								<th>기타</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -32,6 +33,7 @@
 								<td th:text="${list['shop_addr']}"></td>
 								<td th:text="${list['manager_name']}"></td>
 								<td th:text="${list['manager_hp']}"></td>
+								<td>기타</td>
 							</tr>
 						</tbody>
 					</table>

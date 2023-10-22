@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -28,14 +29,13 @@ public class ProductController {
 
 	@GetMapping("productAllList") //전체 재고 목록
 	public String productAllList(Model model) {
-		Map<String, Object> list = ps.productAllList();
+		List<Map<String, Object>> list = ps.productAllList();
 		model.addAttribute("list", list);
 		return "shop/product/productAllList";
 	}
 	
 	@GetMapping("productList") //지점별 재고 목록
 	public String productList(HttpSession session, Model model, HttpServletResponse res) throws Exception {
-		System.out.println(session.getAttribute("shopNo"));
 		Map<String, Object> stock = ps.productList(session.getAttribute("shopNo").toString());
 		Map<String, Object> pro = ps.productgetList(stock.get("item_no").toString());
 		model.addAttribute("stock", stock);
@@ -53,12 +53,6 @@ public class ProductController {
 	}
 	@PostMapping("productRegister") //재고 DB 등록
 	public void productRegister(ShProductDTO dto, HttpServletResponse res) throws Exception{
-		System.out.println(dto.getItemName());
-		System.out.println(dto.getItemPrice());
-		System.out.println(dto.getItemDesc());
-		System.out.println(dto.getItemCategory());
-		System.out.println(dto.getItemState());
-		
 		String msg = ps.productRegister(dto);
 		res.setContentType("text/html; charset=utf-8");
 		PrintWriter out = res.getWriter();
