@@ -7,8 +7,55 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Login - SB Admin</title>
-        <link href="/shop/css/styles.css" rel="stylesheet" />
-        <script src="/shop/js/all.js" crossorigin="anonymous"></script>
+        <link href="/css/styles.css" rel="stylesheet" />
+        <script src="/js/all.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+ <script>
+	 function loginChk(){
+		 
+		 if( document.getElementById('inputId').value == '' ){
+			 alert("아이디를 입력하세요");
+			 location.href="/shop/login";
+		 }else if( document.getElementById('inputPw').value == ''){
+			 alert("비밀번호를 입력하세요");
+			 location.href="/shop/login";
+		 }
+		 
+		 
+		let form = {};
+		let arr = $("#loginChk").serializeArray();
+		arr.forEach( data => {
+			form[data.name] = data.value;
+		});
+		console.log(form) //{id: '1', pw: '1'}
+		
+		$.ajax({
+			url : "/shop/login_chk", type : "post",
+			data : JSON.stringify( form ),
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			success : function(result){
+				console.log("통신 성공");
+				console.log(result);
+				if(result == '1'){
+					 alert("로그인 성공");
+			 		location.href="/";
+				}else if(result == '2'){
+					alert("비밀번호 틀림");
+			 		location.href="/shop/login";
+				}else if(result == '0'){
+					alert("아이디가 없음");
+			 		location.href="/shop/login";
+				}
+			
+			},
+			error : () => {
+				alert("통신 문제 발생")
+			}
+		})
+	}
+ </script>
+ 
  
 </head>
 <body class="bg-info">
@@ -21,13 +68,13 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
-                                        <form action="login_chk" method="post">
+                                        <form id="loginChk">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" name="id" type="text" placeholder="input Id" />
+                                                <input class="form-control" id="inputId" name="id" type="text" placeholder="input Id" />
                                                 <label for="inputEmail">input Id</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" name="pw" type="password" placeholder="input Password" />
+                                                <input class="form-control" id="inputPw" name="pw" type="password" placeholder="input Password" />
                                                 <label for="inputPassword">input Password</label>
                                             </div>
                                             <div class="form-check mb-3">
@@ -36,7 +83,7 @@
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="password.html">Forgot Password?</a>
-                                                <input class="btn btn-info" type="submit" value="Login">
+                                                <button class="btn btn-info" type="button" onclick="loginChk()">Login</button>
                                             </div>
                                         </form>
                                     </div>
@@ -64,8 +111,8 @@
                 </footer>
             </div>
         </div>
-        <script src="/shop/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="/shop/js/scripts.js"></script>
+        <script src="/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/js/scripts.js"></script>
 
 </body>
 </html>

@@ -7,8 +7,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.example.demo.DTO.ShShopDTO;
 import com.example.demo.common.GetMessage;
 import com.example.demo.mapper.BranchMapper;
 import com.example.demo.service.branch.BranchService;

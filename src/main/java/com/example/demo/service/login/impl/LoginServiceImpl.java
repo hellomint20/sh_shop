@@ -21,28 +21,28 @@ public class LoginServiceImpl implements LoginService {
 	
 	public String loginChk(Map<String, Object> map, HttpSession session) {
 		Map<String, Object> mapInfo = mapper.getInfo(map.get("id").toString());
+		
+		String result = "99";
+		
 		if(mapInfo != null) {
 			if(mapInfo.get("member_pw").equals(map.get("pw"))) { //로그인 성공
 				session.setAttribute("memberId", mapInfo.get("member_id"));
 				session.setAttribute("authType", mapInfo.get("auth_type"));
 				session.setAttribute("memberName", mapInfo.get("member_name"));
 				session.setAttribute("shopNo", mapInfo.get("shop_no"));
-				msg = "로그인 성공";
-				url = "/shop/";
+				result = "1";
 			}else { //비밀번호 틀립
-				msg = "비밀번호가 틀림";
-				url = "/shop/login";
+				result = "2";
 			}
 		}else { //아이디가 없음
-			msg = "존재하는 아이디가 없음";
-			url = "/shop/login";
+			result = "0";
 		}
 		
-		return GetMessage.getMessage(msg, url);
+		return result;
 	}
 	public String logout() {
 		msg = "로그아웃 되었습니다";
-		url = "/shop/";
+		url = "/";
 		return GetMessage.getMessage(msg, url);
 	}
 }

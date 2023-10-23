@@ -10,18 +10,18 @@
 
 	<title>Dashboard - SB Admin</title>
 
-	<link href="/shop/css/styles.css" rel="stylesheet" />
-	<link href="/shop/css/branchList.css" rel="stylesheet" />
-
-	<script src="/shop/js/all.js" crossorigin="anonymous"></script>
-	<script src="/shop/js/member.js"></script>
-	<script src="/shop/js/branch.js"></script>
+	<link href="/css/styles.css" rel="stylesheet" />
+	<link href="/css/branchList.css" rel="stylesheet" />
+ 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="/js/all.js" crossorigin="anonymous"></script>
+	<script src="/js/member.js"></script>
+	<script src="/js/branch.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="/shop">SH shop</a>
+		<a class="navbar-brand ps-3" href="/">SH shop</a>
 		<!-- Sidebar Toggle-->
 		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
 			<i class="fas fa-bars"></i></button>
@@ -40,13 +40,13 @@
 				<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
 					aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
 				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-					<li><a class="dropdown-item" href="memberInfo">개인정보</a></li>
-					<li><a class="dropdown-item" href="register">회원가입</a></li>
+					<li><a class="dropdown-item" href="/shop/memberInfo">개인정보</a></li>
+					<li><a class="dropdown-item" href="/shop/register/page">회원가입</a></li>
 					<li>
 						<hr class="dropdown-divider" />
 					</li>
-					<li th:if="${session.memberId == null}"><a class="dropdown-item" href="login">로그인</a></li>
-					<li th:if="${session.memberId != null}"><a class="dropdown-item" href="logout">로그아웃</a></li>
+					<li th:if="${session.memberId == null}"><a class="dropdown-item" href="/shop/login">로그인</a></li>
+					<li th:if="${session.memberId != null}"><a class="dropdown-item" href="/shop/logout">로그아웃</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -151,13 +151,13 @@
 			</footer>
 		</div>
 	</div>
-	<script src="/shop/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-	<script src="/shop/js/scripts.js"></script>
-	<script src="/shop/js/Chart.min.js" crossorigin="anonymous"></script>
-	<script src="/shop/assets/demo/chart-area-demo.js"></script>
-	<script src="/shop/assets/demo/chart-bar-demo.js"></script>
-	<script src="/shop/js/simple-datatables.min.js" crossorigin="anonymous"></script>
-	<script src="/shop/js/datatables-simple-demo.js"></script>
+	<script src="/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="/js/scripts.js"></script>
+	<script src="/js/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="/assets/demo/chart-area-demo.js"></script>
+	<script src="/assets/demo/chart-bar-demo.js"></script>
+	<script src="/js/simple-datatables.min.js" crossorigin="anonymous"></script>
+	<script src="/js/datatables-simple-demo.js"></script>
 </body>
 
 </html>

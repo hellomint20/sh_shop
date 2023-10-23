@@ -1,4 +1,4 @@
-function memberModify() {
+function memberModifyPage(){ //수정 폼으로 변경
 	let content = document.getElementById("memberInfo");
 	let memberInfoId = document.getElementById("memberInfoId").value;
 	let memberInfoPw = document.getElementById("memberInfoPw").value;
@@ -6,7 +6,7 @@ function memberModify() {
 	let memberInfoShopName = document.getElementById("memberInfoShopName").value;
 	let memberInfoAuthType = document.getElementById("memberInfoAuthType").value;
 	content.innerHTML =
-		`<form action="memberModify" method="post">
+		`<form id="memberModify">
 			<div class="row mb-3">
 				<div class="col-md-6">
 					<div class="form-floating mb-3 mb-md-0">
@@ -45,8 +45,38 @@ function memberModify() {
 									</div>
 								</div>
 								<div class="mt-4 mb-0">
-									<div class="d-grid"><input class="btn btn-secondary btn-block" type="submit" value="수정하기">
+									<div class="d-grid"><button class="btn btn-secondary" type="button" onclick="memberModify()">수정하기</button>
 									</div>
 								</div>
 							</form>`;
 }
+function memberModify(){ //수정 내용 DB 등록	 
+		let form = {};
+		let arr = $("#memberModify").serializeArray();
+		arr.forEach( data => {
+			form[data.name] = data.value;
+		});
+		console.log(form) 
+		
+		
+		$.ajax({
+			url : "/shop/memberModify", type : "post",
+			data : JSON.stringify( form ),
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			success : function(result){
+				console.log("통신 성공");
+				console.log(result);
+				if(result == '1'){
+					 alert("개인 정보 수정 성공");
+			 		location.href="/shop/memberInfo";
+				}else if(result == '0'){
+					alert("개인 정보 수정 실패");
+			 		location.href="/shop/memberInfo";
+				}
+			},
+			error : () => {
+				alert("통신 문제 발생")
+			}
+		})
+	}

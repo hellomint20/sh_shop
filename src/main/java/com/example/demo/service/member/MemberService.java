@@ -1,15 +1,14 @@
 package com.example.demo.service.member;
 
+import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 
-import com.example.demo.DTO.ShMemberDTO;
-
 public interface MemberService {
-	public String register(ShMemberDTO dto);
-	public String register2(Map<String, Object> map);
+	public int register(Map<String, Object> map);
 	public Map<String, Object> memberInfo(String id);
-	public String memberModify(ShMemberDTO dto);
+	public int memberModify(Map<String, Object> map);
 	public String memberDelete(HttpSession session);
+	public List<Map<String, Object>> branchList(); //지점 목록 가져오기
+	public List<Map<String, Object>> authTypeList(); //관리자 등급 가져오기
 }

@@ -4,32 +4,53 @@
 <mapper namespace="com.example.demo.mapper.MemberMapper">
 	
 	<select id="getInfo"  resultType="map">
-		select * from sh_member where member_id=#{id}
+		select 
+			* 
+		from sh_member 
+		where member_id=#{id}
 	</select>
 	
 	<select id="getShopNo" resultType="map">
-		select * from sh_shop where shop_name = #{shopName}
+		select 
+			* 
+		from sh_shop 
+		where shop_name = #{shopName}
 	</select>
 	
 	<select id="getShopName" resultType="map">
-		select * from sh_shop where shop_no = #{shopNo}
+		select 
+			* 
+		from sh_shop 
+		where shop_no = #{shopNo}
+	</select>
+	
+	<select id="branchList" resultType="map">
+		select 
+			shop_name
+		from sh_shop
+	</select>
+	
+	<select id="authTypeList" resultType="map">
+		select 
+			code_no, code_desc1 
+		from sh_code 
+		where code_type='auth_type'
+		order by code_no asc
 	</select>
 	
 	<insert id="register">
-		insert into sh_member(member_id, member_pw, member_name, shop_no, auth_type)
-		values(#{memberId}, #{memberPw}, #{memberName}, #{shopNo}, #{authType})
-	</insert>
-	
-	<insert id="register2">
-		insert into sh_member(member_id, member_pw, member_name, shop_no, auth_type)
+		insert into 
+			sh_member(member_id, member_pw, member_name, shop_no, auth_type)
 		values(#{memberId}, #{memberPw}, #{memberName}, #{shopNo}, #{authType})
 	</insert>
 	
 	<update id="memberModify">
-		update sh_member set member_name=#{memberName}, shop_no=#{shopNo} where member_id=#{memberId}
+		update sh_member 
+			set member_name=#{memberName}, shop_no=#{shopNo} where member_id=#{memberId}
 	</update>
 	
 	<delete id="memberDelete">
-		delete from sh_member where member_id=#{id}
+		delete from sh_member 
+			where member_id=#{id}
 	</delete>
 </mapper>
