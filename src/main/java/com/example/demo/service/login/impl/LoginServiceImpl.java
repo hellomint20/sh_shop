@@ -31,6 +31,7 @@ public class LoginServiceImpl implements LoginService {
 				session.setAttribute("memberName", mapInfo.get("member_name"));
 				session.setAttribute("shopNo", mapInfo.get("shop_no"));
 				result = "1";
+				System.out.println(session.getAttribute("shopNo"));
 			}else { //비밀번호 틀립
 				result = "2";
 			}

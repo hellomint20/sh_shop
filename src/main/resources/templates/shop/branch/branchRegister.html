@@ -7,8 +7,58 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Login - SB Admin</title>
-        <link href="/shop/css/styles.css" rel="stylesheet" />
-        <script src="/shop/js/all.js" crossorigin="anonymous"></script>
+        <link href="/css/styles.css" rel="stylesheet" />
+        <script src="/js/all.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script>
+			function branchRegister(){
+				 if (document.getElementById('inputBranchName').value == '') {
+					alert("지점명을 입력하세요");
+					return "/shop/branchRegister";
+				} else if (document.getElementById('inputBranchTel').value == '') {
+					alert("지점 전화번호를 입력하세요");
+					return "/shop/branchRegister";
+				} else if (document.getElementById('inputBranchAddr').value == '') {
+					alert("지점 주소를 입력하세요");
+					return "/shop/branchRegister";
+				} else if (document.getElementById('inputManagerName').value == '') {
+					alert("매니저 이름을 입력하세요");
+					return "/shop/branchRegister";
+				} else if (document.getElementById('inputManagerHp').value == '') {
+					alert("매니저 전화번호를 입력하세요");
+					return "/shop/branchRegister";
+				}
+						
+				let form = {};
+					let arr = $("#branchRegister").serializeArray();
+					arr.forEach( data => {
+						form[data.name] = data.value;
+					});
+					console.log(form) 
+					
+					$.ajax({
+						url : "/shop/branchRegister", type :"post",
+						data : JSON.stringify(form),
+						contentType : "application/json; charset=utf-8",
+						dataType : "json",
+						success : function(result){
+							console.log("통신 성공");
+							console.log(result);
+							if(result == '1'){
+								 alert("지점 등록 성공");
+						 		location.href="/shop/branchList";
+							}else if(result == '0'){
+								alert("지점 등록 실패");
+						 		location.href="/shop/branchRegister";
+							}
+						},
+						error : () => {
+						alert("통신 문제 발생")
+						}
+					})
+			}
+			
+		</script>
  
 </head>
     <body class="bg-info">
@@ -21,41 +71,41 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">지점 등록</h3></div>
                                     <div class="card-body">
-                                        <form action="branchRegister" method="post">
+                                        <form id="branchRegister">
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputFirstName" name="shopName" type="text" placeholder="Enter your id" />
-                                                        <label for="inputFirstName">지점명</label>
+                                                        <input class="form-control" id="inputBranchName" name="shopName" type="text" placeholder="Enter your id" />
+                                                        <label for="inputBranchName">지점명</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <input class="form-control" id="inputLastName" name="shopTel" type="text" placeholder="Enter your last pw" />
-                                                        <label for="inputLastName">지점 전화번호</label>
+                                                        <input class="form-control" id="inputBranchTel" name="shopTel" type="text" placeholder="Enter your last pw" />
+                                                        <label for="inputBranchTel">지점 전화번호</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="text" name="shopAddr" placeholder="Enter your name" />
-                                                <label for="inputEmail">지점 주소</label>
+                                                <input class="form-control" id="inputBranchAddr" type="text" name="shopAddr" placeholder="Enter your name" />
+                                                <label for="inputBranchAddr">지점 주소</label>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPassword" name="managerName" type="text" placeholder="Enter your branchName" />
-                                                        <label for="inputPassword">매니저 이름</label>
+                                                        <input class="form-control" id="inputManagerName" name="managerName" type="text" placeholder="Enter your branchName" />
+                                                        <label for="inputManagerName">매니저 이름</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPasswordConfirm" name="managerHp" type="text" placeholder="Confirm password" />
-                                                        <label for="inputPasswordConfirm">매니저 전화번호</label>
+                                                        <input class="form-control" id="inputManagerHp" name="managerHp" type="text" placeholder="Confirm password" />
+                                                        <label for="inputManagerHp">매니저 전화번호</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><input class="btn btn-primary btn-block" type="submit" value="지점 등록"></div>
+                                                <div class="d-grid"><button class="btn btn-primary btn-block" type="button" onclick="branchRegister()" >지점 등록</button></div>
                                             </div>
                                         </form>
                                     </div>
@@ -83,7 +133,7 @@
                 </footer>
             </div>
         </div>
-        <script src="/shop/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="/shop/js/scripts.js"></script>
+        <script src="/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/js/scripts.js"></script>
     </body>
 </html>

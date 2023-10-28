@@ -74,10 +74,10 @@
 						<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
 							data-bs-parent="#sidenavAccordion">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="productList">
+								<a class="nav-link" href="/shop/productList">
 									<div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
 									재고(각 지점 조회)</a>
-								<a class="nav-link" href="sellRefund">
+								<a class="nav-link" href="/shop/sellRefund">
 									<div class="sb-nav-link-icon"><i class="fa-solid fa-coins"></i></div>
 									sell/refund(각 지점 판매/환불)</a>
 							</nav>
@@ -106,7 +106,7 @@
 										<a class="nav-link" href="#">month</a>
 									</nav>
 								</div>
-								<a class="nav-link" href="branchInfo">
+								<a class="nav-link" href="/shop/branchInfo">
 									<div class="sb-nav-link-icon"><i class="fa-solid fa-circle-info"></i></div>
 									지점 정보 확인
 								</a>
@@ -114,11 +114,11 @@
 						</div>
 					<div th:if="${session.authType == '00'}">
 						<div class="sb-sidenav-menu-heading">admin</div>
-						<a class="nav-link" href="productAllList">
+						<a class="nav-link" href="/shop/productAllList">
 							<div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
 							전체 재고 확인 및 등록
 						</a>
-						<a class="nav-link" href="branchList">
+						<a class="nav-link" href="/shop/branchList">
 							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
 							지점별 정보 확인
 						</a>

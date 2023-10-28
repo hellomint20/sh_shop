@@ -1,4 +1,28 @@
-function branchModify() {
+function branchDelete(shopNo){ //지점 삭제
+	console.log(shopNo)
+	
+	$.ajax({
+		url : "/shop/branchDelete", type : "post",
+		data : JSON.stringify(shopNo),
+		contentType : "application/json; charset=utf-8",
+		dataType : "json",
+		success : function(result){
+			console.log("통신 성공");
+			if(result == '1'){
+					 alert("삭제 되었습니다");
+			 		location.href="/shop/branchList";
+				}else if(result == '0'){
+					alert("삭제 실패");
+			 		location.href="/shop/branchList";
+				}
+		},
+		error : () =>{
+			console.log("문제 발생");
+		}
+	})
+}
+
+function branchModifyPage() { //지점 정보 수정 페이지
 	let content = document.getElementById("branchInfo");
 	let branchInfoName = document.getElementById("branchInfoName").value;
 	let branchInfoTel = document.getElementById("branchInfoTel").value;
@@ -7,7 +31,7 @@ function branchModify() {
 	let branchInfoManager = document.getElementById("branchInfoManager").value;
 	let branchInfoManagerTel = document.getElementById("branchInfoManagerTel").value;
 	content.innerHTML =
-		`<form action="branchModify" method="post">
+		`<form id="branchModify">
 			<div class="row mb-3">
 				<div class="col-md-6">
 					<div class="form-floating mb-3 mb-md-0">
@@ -47,8 +71,38 @@ function branchModify() {
 			</div>
 			<div class="mt-4 mb-0">
 				<div class="d-grid">
-					<input class="btn btn-secondary btn-block" type="submit" value="수정하기">
+					<button class="btn btn-secondary btn-block" type="button" onclick="branchModify()">수정하기</button>
 				</div>
 			</div>
 		</form>`;
+}
+
+function branchModify(){
+	let form ={};
+	let arr = $("#branchModify").serializeArray();
+		arr.forEach( data => {
+			form[data.name] = data.value;
+		});
+		console.log(form)
+		
+		$.ajax({
+			url : "/shop/branchModify", type : "post",
+			data : JSON.stringify( form ),
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			success : function(result){
+				console.log("통신 성공");
+				console.log(result);
+				if(result == '1'){
+					 alert("지점 정보 수정 성공");
+			 		location.href="/shop/branchInfo";
+				}else if(result == '0'){
+					alert("지점 정보 수정 실패");
+			 		location.href="/shop/branchInfo";
+				}
+			},
+			error : () => {
+				alert("통신 문제 발생")
+			}
+		}) 
 }

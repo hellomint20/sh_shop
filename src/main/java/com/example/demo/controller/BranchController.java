@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.example.demo.service.branch.BranchService;
 
 @Controller
@@ -39,25 +42,47 @@ public class BranchController {
 	public String branchRegister() {
 		return "shop/branch/branchRegister";
 	}
-	@RequestMapping("branchRegister") //지점 DB 등록
-	public void branchRegister(@RequestParam Map<String, Object> map, HttpServletResponse res) throws Exception {
-		String msg = bs.branchRegister(map);
-		res.setContentType("text/html; charset=utf-8");
-		PrintWriter out = res.getWriter();
-		out.print(msg);
+	
+	@ResponseBody
+	@RequestMapping(value = "branchRegister", method = RequestMethod.POST) //지점 DB 등록
+	public String branchRegister(@RequestBody Map<String, Object> map) {
+		String result ="";
+		try {
+			result = Integer.toString(bs.branchRegister(map));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
-
-	@RequestMapping("branchModify") //지점 DB 등록
-	public void branchModify(@RequestParam Map<String, Object> map, HttpSession session, HttpServletResponse res) throws Exception {
+	
+	@ResponseBody
+	@RequestMapping(value = "branchModify", method = RequestMethod.POST) //지점 DB 등록
+	public String branchModify(@RequestBody Map<String, Object> map, HttpSession session) {
 		System.out.println(map);
+		System.out.println(session.getAttribute("shopNo").toString());
 		map.put("shopNo", session.getAttribute("shopNo"));
-		String msg = bs.branchModify(map);
-		res.setContentType("text/html; charset=utf-8");
-		PrintWriter out = res.getWriter();
-		out.print(msg);
+		System.out.println(map);
+		String result = "";
+		try {
+			result = Integer.toString(bs.branchModify(map));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
+	@ResponseBody
 	@PostMapping("branchDelete")
-	public void branchDelete(@RequestBody String shopName) {
-		System.out.println(shopName);
+	public String branchDelete(@RequestBody String shopNo) {
+		System.out.println("branchDelete "+shopNo);
+		
+		String result = "";
+		try {
+			result = Integer.toString(bs.branchDelete(shopNo));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		return result;
 	}
 }

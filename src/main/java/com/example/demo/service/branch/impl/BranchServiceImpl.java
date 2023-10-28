@@ -20,12 +20,12 @@ public class BranchServiceImpl implements BranchService{
 	String msg = ""; // alert
 	String url = ""; // url
 	
-	public List<Map<String, Object>> branchList(){
+	public List<Map<String, Object>> branchList(){ //지점 목록 조회
 		List<Map<String, Object>> map = mapper.branchList();
 		return map;
 	}
 	
-	public String branchRegister(Map<String, Object> map) {
+	public int branchRegister(Map<String, Object> map) { //지점 등록
 		// 현재 날짜 구하기
         LocalDate now = LocalDate.now();
         // 포맷 정의
@@ -42,31 +42,22 @@ public class BranchServiceImpl implements BranchService{
 
 		int result = 0;
 		result = mapper.branchRegister(map);
-		
-		if(result == 1) { //지점 등록 성공
-			msg = "지점 등록 성공";
-			url = "/shop/branchList";
-		}else { //지점 등록 실패
-			msg = "지점 등록 실패";
-			url = "/shop/branchList"; ///??? 쓰던 내용으로 돌려야 하나?
-		}
-		return GetMessage.getMessage(msg, url);
+
+		return result;
 	}
-	public Map<String, Object> branchInfo(String shopNo){
+	public Map<String, Object> branchInfo(String shopNo){ //지점 정보
 		return mapper.branchInfo(shopNo);
 	}
-	public String branchModify(Map<String, Object> map) {
+	public int branchModify(Map<String, Object> map) { //지점 정보 수정
 		System.out.println(map);
 		int result = 0;
 		result = mapper.branchModify(map);
-		
-		if(result == 1) { //지점 수정 성공
-			msg = "지점 정보 수정 성공";
-			url = "/shop/branchInfo";
-		}else { //지점 수정 실패
-			msg = "지점 정보 수정 실패";
-			url = "/shop/branchInfo"; ///??? 쓰던 내용으로 돌려야 하나?
-		}
-		return GetMessage.getMessage(msg, url);
+		return result;
+	}
+	public int branchDelete(String shopNo) { //지점 삭제
+		int result = 0;
+		result = mapper.branchDelete(shopNo);
+		System.out.println("123 :" + result);
+		return result;
 	}
 }

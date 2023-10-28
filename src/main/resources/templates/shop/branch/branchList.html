@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/layout}">
-	
+
 	<main layout:fragment="content">
 		<div class="container-fluid px-4">
 			<h1 class="mt-4">지점 정보</h1>
@@ -10,7 +10,6 @@
 				<div class="card-header">
 					<i class="fas fa-table me-1"></i>
 					<a href="branchRegister" id="branchRegister">지점 등록</a>
-					<a href="#">지점 삭제</a>
 				</div>
 				<div class="card-body">
 					<table id="datatablesSimple">
@@ -33,7 +32,10 @@
 								<td th:text="${list['shop_addr']}"></td>
 								<td th:text="${list['manager_name']}"></td>
 								<td th:text="${list['manager_hp']}"></td>
-								<td>기타</td>
+								<td><button class="btn btn-danger btn-sm" type="button" th:myName="${list['shop_no']}"
+								 th:onclick="branchDelete(this.getAttribute('myName'))">삭제</button>
+								 <button class="btn btn-info btn-sm" type="button" th:myName="${list['shop_no']}"
+								 th:onclick="branchModify(this.getAttribute('myName'))">수정</button></td>
 							</tr>
 						</tbody>
 					</table>
