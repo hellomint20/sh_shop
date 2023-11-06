@@ -47,7 +47,6 @@ public class MemberServiceImpl implements MemberService{
 		try { //DB 넘어가는 
 			 result = mapper.register(map);
 		} catch (Exception e) {
-			System.out.println("sevice");
 			result = 99;
 			e.printStackTrace();
 		}

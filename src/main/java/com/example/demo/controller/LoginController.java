@@ -25,17 +25,6 @@ public class LoginController {
 	public String login() {
 		return "shop/member/login";
 	}
-	/*@PostMapping("login_chk") //로그인 확인
-	public void loginChk(@RequestParam String id, @RequestParam String pw,
-							HttpServletResponse res, HttpSession session) throws Exception{
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("id", id);
-		map.put("pw", pw);
-		String msg = ls.loginChk(map, session);
-		res.setContentType("text/html; charset=utf-8");
-		PrintWriter out = res.getWriter();
-		out.print(msg);
-	}*/
 	
 	@ResponseBody //header 속성 대신 사용 //produces : 반환 타입 지정??
 	@PostMapping(value = "login_chk")

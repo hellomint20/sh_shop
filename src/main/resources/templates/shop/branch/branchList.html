@@ -32,10 +32,12 @@
 								<td th:text="${list['shop_addr']}"></td>
 								<td th:text="${list['manager_name']}"></td>
 								<td th:text="${list['manager_hp']}"></td>
-								<td><button class="btn btn-danger btn-sm" type="button" th:myName="${list['shop_no']}"
-								 th:onclick="branchDelete(this.getAttribute('myName'))">삭제</button>
-								 <button class="btn btn-info btn-sm" type="button" th:myName="${list['shop_no']}"
-								 th:onclick="branchModify(this.getAttribute('myName'))">수정</button></td>
+								<td>
+									<button class="btn btn-info btn-sm" type="button" th:myName="${list['shop_no']}"
+										 th:onclick="branchInfo(this.getAttribute('myName'))">수정</button>
+									<button class="btn btn-danger btn-sm" type="submit" th:myName="${list['shop_no']}"
+								 		th:onclick="branchDelete(this.getAttribute('myName'))">삭제</button>
+								</td>
 							</tr>
 						</tbody>
 					</table>

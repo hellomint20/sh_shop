@@ -13,10 +13,16 @@
  <script>
 	 function loginChk(){
 		 
-		 if( document.getElementById('inputId').value == '' ){
+		 let inputId = document.getElementById('inputId').value;
+		 
+		 if( inputId === null || inputId === undefined || inputId === "" ){
 			 alert("아이디를 입력하세요");
-			 location.href="/shop/login";
-		 }else if( document.getElementById('inputPw').value == ''){
+			 // location.href="/shop/login";
+			 // 스크립트로 값 초기화 후 리턴
+			 return;
+		 }
+		 
+		 if( document.getElementById('inputPw').value == ''){
 			 alert("비밀번호를 입력하세요");
 			 location.href="/shop/login";
 		 }

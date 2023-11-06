@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+	
+	<main layout:fragment="content">
+		<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-7">
+				<div class="border-0 rounded-lg mt-5">
+					<div class="card-header">
+						<h3 class="text-center font-weight-light my-4">{ <span 
+								th:text="${product['item_name']}"></span> }&nbsp; 재고 수정</h3>
+					</div>
+					<div class="card-body">
+						<form id="productModifyDo">
+							<input type="hidden" id="itemNo" th:value="${product['item_no']}" >
+							<div class="row mb-3">
+								<div class="col-md-6">
+									<div class="form-floating mb-3 mb-md-0">
+										<input class="form-control" id="inputItemName" name="itemName" type="text"
+											th:value="${product['item_name']}"/>
+										<label for="inputItemName">상품명</label>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-floating">
+										<input class="form-control" id="inputItemPrice" type="text" name="itemPrice"
+											th:value="${product['item_price']}"/>
+										<label for="inputItemPrice">상품가격</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-floating mb-3">
+								<input class="form-control" id="inputItemDesc" name="itemDesc" type="text"
+									th:value="${product['item_desc']}"/>
+								<label for="inputItemDesc">상품 설명</label>
+							</div>
+							<div class="row mb-3">
+								<div class="col-md-6">
+									<div class="form-floating mb-3 mb-md-0">
+										<select class="form-select" id="inputCategory" name="itemCategory">
+											<option selected th:text="${product['item_category']}"></option>
+											<option th:each="itemCategory : ${itemCategory}"
+												th:text="${itemCategory['code_desc1']}" th:if="${itemCategory['code_desc1']} != ${product['item_category']}"
+												value="${itemCategory['code_no']}"></option>
+										</select>
+										<label for="inputCategory">상품 카테고리</label>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-floating mb-3 mb-md-0">
+										<select class="form-select" id="inputState" name="itemState">
+											<option selected th:text="${product['item_state']}"></option>
+											<option th:each="itemState : ${itemState}" th:if="${itemState['code_desc1']} != ${product['item_state']}"
+												th:text="${itemState['code_desc1']}" value="${itemState['code_no']}">
+											</option>
+										</select>
+										<label for="inputState">판매 상태</label>
+									</div>
+								</div>
+							</div>
+							<div class="mt-4 mb-0">
+								<div class="d-grid">
+									<button class="btn btn-info" type="button" onclick="productModiDo();">수정하기</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="card-footer text-center py-3">
+						<div class="small"><a href="/shop/productAllList">목록으로 이동</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</main>
+</html>

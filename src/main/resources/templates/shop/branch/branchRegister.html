@@ -14,19 +14,23 @@
 			function branchRegister(){
 				 if (document.getElementById('inputBranchName').value == '') {
 					alert("지점명을 입력하세요");
-					return "/shop/branchRegister";
-				} else if (document.getElementById('inputBranchTel').value == '') {
+					return false;
+				}  
+				if (document.getElementById('inputBranchTel').value == '') {
 					alert("지점 전화번호를 입력하세요");
-					return "/shop/branchRegister";
-				} else if (document.getElementById('inputBranchAddr').value == '') {
+					return false;
+				} 
+				if (document.getElementById('inputBranchAddr').value == '') {
 					alert("지점 주소를 입력하세요");
-					return "/shop/branchRegister";
-				} else if (document.getElementById('inputManagerName').value == '') {
+					return false;
+				} 
+				if (document.getElementById('inputManagerName').value == '') {
 					alert("매니저 이름을 입력하세요");
-					return "/shop/branchRegister";
-				} else if (document.getElementById('inputManagerHp').value == '') {
+					return false;
+				} 
+				if (document.getElementById('inputManagerHp').value == '') {
 					alert("매니저 전화번호를 입력하세요");
-					return "/shop/branchRegister";
+					return false;
 				}
 						
 				let form = {};

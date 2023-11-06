@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -27,16 +26,13 @@ public class MemberController {
 	
 	@GetMapping("register/page") //회원가입 페이지
 	public String register(Model model) {
-		model.addAttribute("branch", ms.branchList()); //현재 지점 목록 가져오기
-		List<Map<String, Object>> authType = ms.authTypeList();
-		authType.remove(0); //관리자 등급 제외
-		model.addAttribute("authType", authType );//관리자 등급 가져오기
+		model.addAttribute("branch", ms.branchList()); //지점 목록 가져오기
+		model.addAttribute("authType", ms.authTypeList());//관리자 등급 가져오기
 		return "shop/member/memberRegister";
 	}
 	@ResponseBody
 	@RequestMapping(value ="register/do", method = RequestMethod.POST)
 	public String register(@RequestBody Map<String, Object> map){
-		System.out.println(map); //{memberId=4, memberPw=4, memberName=김현웅, shopName=서울, authType=매니저}
 		String result = "";
 		try {
 			result = Integer.toString(ms.register(map));

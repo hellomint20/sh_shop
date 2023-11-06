@@ -1,6 +1,5 @@
 function branchDelete(shopNo){ //지점 삭제
-	console.log(shopNo)
-	
+
 	$.ajax({
 		url : "/shop/branchDelete", type : "post",
 		data : JSON.stringify(shopNo),
@@ -27,7 +26,6 @@ function branchModifyPage() { //지점 정보 수정 페이지
 	let branchInfoName = document.getElementById("branchInfoName").value;
 	let branchInfoTel = document.getElementById("branchInfoTel").value;
 	let branchInfoAddr = document.getElementById("branchInfoAddr").value;
-	console.log(branchInfoAddr);
 	let branchInfoManager = document.getElementById("branchInfoManager").value;
 	let branchInfoManagerTel = document.getElementById("branchInfoManagerTel").value;
 	content.innerHTML =

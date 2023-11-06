@@ -8,7 +8,7 @@
 			<div class="card mb-4">
 				<div class="card-header">
 					<i class="fa-solid fa-cubes-stacked"></i>
-					<a href="productRegister" style="text-decoration: none; color: black;"> 재고 등록</a>
+					<a href="productRegister/page" style="text-decoration: none; color: black;"> 재고 등록</a>
 				</div>
 				<div class="card-body">
 					<table id="datatablesSimple">
@@ -18,8 +18,10 @@
 								<th>item_name</th>
 								<th>item_price</th>
 								<th>item_category</th>
+								<th>item_desc</th>
 								<th>item_date</th>
 								<th>item_state</th>
+								<th>기타</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -27,9 +29,14 @@
 								<td th:text="${list['item_no']}">상품번호</td>
 								<td th:text="${list['item_name']}">상품명</td>
 								<td th:text="${list['item_price']}">상품가격</td>
-								<td th:text="${list['item_category']}">카테고리</td>
-								<td th:text="${list['item_date']}">등록날짜</td>
-								<td th:text="${list['item_state']}">상태</td>
+								<td th:text="${list['item_category_desc']}">상품 카테고리</td>
+								<td th:text="${list['item_desc']}">상품 설명</td>
+								<td th:text="${list['item_date']}">상품 등록날짜</td>
+								<td th:text="${list['item_state_desc']}">판매 상태</td>
+								<td>
+									<button class="btn btn-info btn-sm" type="submit" th:myName="${list['item_no']}"
+										th:onclick="productModi(this.getAttribute('myName'))">수정</button>
+								</td>
 							</tr>
 						</tbody>
 						<tfoot>
@@ -38,8 +45,10 @@
 								<th>item_name</th>
 								<th>item_price</th>
 								<th>item_category</th>
+								<th>item_desc</th>
 								<th>item_date</th>
 								<th>item_state</th>
+								<th>기타</th>
 							</tr>
 						</tfoot>
 					</table>

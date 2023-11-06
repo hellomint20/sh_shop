@@ -9,7 +9,65 @@
         <title>Login - SB Admin</title>
         <link href="/css/styles.css" rel="stylesheet" />
         <script src="/js/all.js" crossorigin="anonymous"></script>
- 
+ 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script>
+			function productRegister(){
+				let category = document.getElementById('inputCategory').options[document.getElementById('inputCategory').selectedIndex].text;
+				let state = document.getElementById('inputState').options[document.getElementById('inputState').selectedIndex].text;
+			
+				//value 값 
+				 if (document.getElementById('inputItemName').value == '') {
+					alert("상품명을 입력하세요");
+					return false;
+				}  
+				if (document.getElementById('inputItemPrice').value == '') {
+					alert("상품 가격을 입력하세요");
+					return false;
+				} 
+				if (document.getElementById('inputItemDesc').value == '') {
+					alert("상품 설명을 입력하세요");
+					return false;
+				} 
+				if (category == '-----') {
+					alert("상품 카테고리를 선택하세요");
+					return false;
+				} 
+				if (state == '-----') {
+					alert("상품 상태를 선택하세요");
+					return false;
+				}
+						
+				let form = {};
+				let arr = $("#productRegister").serializeArray();
+				arr.forEach( data => {
+					form[data.name] = data.value;
+				});	
+				form['itemCategory'] = category;
+				form['itemState'] = state;
+				console.log(form)
+					
+				$.ajax({
+					type : "POST",
+					url : "/shop/productRegister/do",
+					data : JSON.stringify(form),
+					dataType : "JSON",
+					contentType : "application/json; charset=utf-8",
+					success : function(result) {
+						console.log(result.result)
+						if(result.result === 1){
+							alert("제품이 등록되었습니다.")
+							location.href="/shop/productAllList";
+						} else {
+							alert("서버 에러");
+						}
+					},
+					error : function() {
+						alert("서버통신 에러");
+					}
+					
+			})
+		}
+		</script>
 </head>
     <body class="bg-info">
         <div id="layoutAuthentication">
@@ -21,46 +79,52 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">재고 등록</h3></div>
                                     <div class="card-body">
-                                        <form action="productRegister" method="post">
+                                        <form id="productRegister">
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputFirstName" name="itemName" type="text" placeholder="Enter your name" />
-                                                        <label for="inputFirstName">상품명</label>
+                                                        <input class="form-control" id="inputItemName" name="itemName" type="text" placeholder="Enter your name" />
+                                                        <label for="inputItemName">상품명</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <input class="form-control" id="inputLastName" name="itemPrice" type="text" placeholder="Enter your price" />
-                                                        <label for="inputLastName">상품 가격</label>
+                                                        <input class="form-control" id="inputItemPrice" name="itemPrice" type="text" placeholder="Enter your price" />
+                                                        <label for="inputItemPrice">상품 가격</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="text" name="itemDesc" placeholder="Enter your category" />
-                                                <label for="inputEmail">상품 설명</label>
+                                                <input class="form-control" id="inputItemDesc" type="text" name="itemDesc" placeholder="Enter your category" />
+                                                <label for="inputItemDesc">상품 설명</label>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPassword" name="itemCategory" type="text" placeholder="Enter your desc" />
-                                                        <label for="inputPassword">카테고리</label>
+                                                        <select class="form-select"  id="inputCategory" name="itemCategory">
+															<option selected>-----</option>
+															<option th:each="itemCategory : ${itemCategory}" th:text="${itemCategory['code_desc1']}" value="${itemCategory['code_no']}"></option>
+														</select>
+                                                        <label for="inputCategory">카테고리</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPasswordConfirm" name="itemState" type="text" placeholder="Enter your state" />
-                                                        <label for="inputPasswordConfirm">상품 상태</label>
+                                                        <select class="form-select" id="inputState" name="itemState">
+															<option selected>-----</option>
+															<option th:each="itemState : ${itemState}" th:text="${itemState['code_desc1']}" value="${itemState['code_no']}"></option>
+														</select>
+                                                        <label for="inputState">상품 상태</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><input class="btn btn-info btn-block" type="submit" value="재고 등록"></div>
+                                                <div class="d-grid"><button class="btn btn-info btn-block" type="button" onclick="productRegister()">재고 등록</button></div>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="productInfo">재고 목록으로 이동</a></div>
+                                        <div class="small"><a href="/shop/productAllList">재고 목록으로 이동</a></div>
                                     </div>
                                 </div>
                             </div>

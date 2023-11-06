@@ -31,11 +31,10 @@
 	</select>
 	
 	<select id="authTypeList" resultType="map">
-		select 
-			code_no, code_desc1 
-		from sh_code 
-		where code_type='auth_type'
-		order by code_no asc
+		select code_no, code_desc1 
+			from sh_code A
+		where code_type='auth_type' and NOT A.code_no IN ('00')
+			order by code_no asc;
 	</select>
 	
 	<insert id="register">

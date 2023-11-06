@@ -3,25 +3,62 @@
 
 <mapper namespace="com.example.demo.mapper.ProductMapper">
 
-	<resultMap type="com.example.demo.DTO.ShProductDTO" id="product">
-	
+	<resultMap type="com.example.demo.DTO.ShProductDTO"
+		id="product">
+
 	</resultMap>
-	
+
 	<select id="productAllList" resultType="map">
-		select * from sh_product
+		select A.*,
+			(select code_desc1 from sh_code B where A.item_category =
+				B.code_no and B.code_type ='item_category') as item_category_desc,
+			(select code_desc1 from sh_code B where A.item_state = B.code_no and
+				B.code_type ='item_state') as item_state_desc
+		from sh_product A;
 	</select>
-	
-	<select id="productList" resultType="map">
-		select * from sh_stock where  shop_no=#{shopNo}
-	</select>
-	
-	<select id="productgetList" resultType="map">
-		select * from sh_product where  item_no=#{itemNo}
-	</select>
-	
+
 	<insert id="productRegister">
-		insert into sh_product (item_no, item_name, item_price, item_category, item_desc, item_state)
-		values(#{itemNo}, #{itemName}, #{itemPrice}, #{itemCategory}, #{itemDesc}, #{itemState})
+		insert into sh_product (item_no, item_name, item_price, item_category, item_desc, item_date, item_state)
+		select concat('0', cast(max(item_no)+1 as char)),
+					#{itemName}, #{itemPrice},
+				(select code_no from sh_code where code_desc1 = #{itemCategory}),
+					#{itemDesc}, now(),
+				(select code_no from sh_code where code_desc1 = #{itemState})
+		from sh_product
+			where item_category = (select code_no from sh_code where code_desc1 = #{itemCategory})
 	</insert>
+	
+	<select id="productModifyPage" resultType="map">
+		select item_no, item_name, item_price, 
+				(select code_desc1 from sh_code where code_type ='item_category' and code_no = P.item_category) as item_category, 
+				item_desc, item_date, 
+				(select code_desc1 from sh_code where code_type ='item_state' and code_no = P.item_state) as item_state  
+		from sh_product P where item_no=#{itemNo};
+	</select>
+	
+	<update id="productModify">
+		update sh_product set item_name=#{itemName}, item_price =${itemPrice},
+			item_category = (select code_no from sh_code where code_type ='item_category' and code_desc1 =#{itemCategory}),
+			item_desc = #{itemDesc},
+			item_state = (select code_no from sh_code where code_type ='item_state' and	code_desc1 = #{itemState})
+		where item_no = #{itemNo};
+	</update>
+
+	<select id="productList" resultType="map">
+		select * from sh_stock where
+		shop_no=#{shopNo}
+	</select>
+
+	<select id="itemCategory" resultType="map">
+		select code_no, code_desc1
+		from sh_code
+		where code_type ='item_category'
+	</select>
+
+	<select id="itemState" resultType="map">
+		select code_no,code_desc1
+		from sh_code
+		where code_type ='item_state'
+	</select>
 
 </mapper>
