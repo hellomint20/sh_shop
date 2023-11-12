@@ -47,16 +47,14 @@ public class BranchServiceImpl implements BranchService{
 	public Map<String, Object> branchInfo(String shopNo){ //지점 정보
 		return mapper.branchInfo(shopNo);
 	}
-	public int branchModify(Map<String, Object> map) { //지점 정보 수정
-		System.out.println(map);
+	public int branchModiDo(Map<String, Object> map) { //지점 정보 수정
 		int result = 0;
-		result = mapper.branchModify(map);
+		result = mapper.branchModiDo(map);
 		return result;
 	}
 	public int branchDelete(String shopNo) { //지점 삭제
 		int result = 0;
 		result = mapper.branchDelete(shopNo);
-		System.out.println("123 :" + result);
 		return result;
 	}
 }

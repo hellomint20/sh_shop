@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+
+<main layout:fragment="content">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-7">
+				<div class="border-0 rounded-lg mt-5">
+					<div class="card-header">
+						<h3 class="text-center font-weight-light my-4"><span
+								th:text="${branch['shop_name']}"></span>&nbsp; 지점 정보</h3>
+					</div>
+					<div class="card-body" id="branchInfo">
+						<form id="branchModiDo">
+							<input type="hidden" th:value="${branch['shop_no']}" id="shopNo">
+							<div class="row mb-3">
+								<div class="col-md-6">
+									<div class="form-floating mb-3 mb-md-0">
+										<input class="form-control" id="branchInfoName" name="shopName" type="text"
+											th:value="${branch['shop_name']}" />
+										<label for="branchInfoName">지점명</label>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-floating">
+										<input class="form-control" id="branchInfoTel" name="shopTel" type="text"
+											th:value="${branch['shop_tel']}" />
+										<label for="branchInfoTel">전화번호</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-floating mb-3">
+								<input class="form-control" id="branchInfoAddr" type="text" name="shopAddr"
+									th:value="${branch['shop_addr']}" />
+								<label for="branchInfoAddr">주소</label>
+							</div>
+							<div class="row mb-3">
+								<div class="col-md-6">
+									<div class="form-floating mb-3 mb-md-0">
+										<input class="form-control" id="branchInfoManager" name="managerName"
+											type="text" th:value="${branch['manager_name']}" />
+										<label for="branchInfoManager">매니저</label>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-floating mb-3 mb-md-0">
+										<input class="form-control" id="branchInfoManagerTel" name="managerHp"
+											type="text" th:value="${branch['manager_hp']}" />
+										<label for="branchInfoManagerTel">매니저 전화번호</label>
+									</div>
+								</div>
+							</div>
+							<div class="mt-4 mb-0">
+								<div class="d-grid">
+									<button class="btn btn-info btn-block" type="button"
+										onclick="branchModiDo();">수정하기</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="card-footer text-center py-3">
+						<div class="small"><a href="/">메인으로 이동</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+
+</html>

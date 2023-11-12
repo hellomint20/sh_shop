@@ -12,11 +12,8 @@
 
 	<link href="/css/styles.css" rel="stylesheet" />
 	<link href="/css/branchList.css" rel="stylesheet" />
- 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="/js/all.js" crossorigin="anonymous"></script>
-	<script src="/js/member.js"></script>
-	<script src="/js/branch.js"></script>
-	<script src="/js/product.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -31,8 +28,8 @@
 			<div class="input-group">
 				<input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
 					aria-describedby="btnNavbarSearch" />
-				<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i
-						class="fas fa-search"></i></button>
+				<button class="btn btn-primary" id="btnNavbarSearch" type="button">
+					<i class="fas fa-search"></i></button>
 			</div>
 		</form>
 		<!-- Navbar-->
@@ -41,8 +38,12 @@
 				<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
 					aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
 				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-					<li th:if="${session.memberId != null}"><a class="dropdown-item" href="/shop/memberInfo">개인정보</a></li>
-					<li th:if="${session.memberId == null}"><a class="dropdown-item" href="/shop/register/page">회원가입</a></li>
+					<li th:if="${session.memberId != null}"><a class="dropdown-item" href="/shop/memberInfo">개인정보</a>
+					</li>
+					<li th:if="${session.memberId != null}"><a class="dropdown-item" href="/shop/branchInfo">지점정보</a>
+					</li>
+					<li th:if="${session.memberId == null}"><a class="dropdown-item" href="/shop/register/page">회원가입</a>
+					</li>
 					<li>
 						<hr class="dropdown-divider" />
 					</li>
@@ -58,75 +59,28 @@
 				<div class="sb-sidenav-menu">
 					<div class="nav">
 						<div class="sb-sidenav-menu-heading">Mode</div>
-						<a class="nav-link" href="#">
+						<span class="nav-link">
 							<div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
 							<span th:if="${session.authType == null}"> Guest </span>
 							<span th:if="${session.authType == '00'}"> admin </span>
 							<span th:if="${session.authType == '01'}"> manager </span>
 							<span th:if="${session.authType == '02'}"> empolyee </span>
-						</a>
+						</span>
 						<div class="sb-sidenav-menu-heading">Menu</div>
-						<div class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
-							aria-expanded="false" aria-controls="collapseLayouts">
+							<a class="nav-link" href="/shop/productGetList">
 							<div class="sb-nav-link-icon"><i class="fa-solid fa-file-invoice"></i></div>
-							product
-							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-						</div>
-						<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
-							data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="/shop/productList">
-									<div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
-									재고(각 지점 조회)</a>
-								<a class="nav-link" href="/shop/sellRefund">
-									<div class="sb-nav-link-icon"><i class="fa-solid fa-coins"></i></div>
-									sell/refund(각 지점 판매/환불)</a>
-							</nav>
-						</div>
-						<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
-							aria-expanded="false" aria-controls="collapsePages">
-							<div class="sb-nav-link-icon"><i class="fa-solid fa-pen-to-square"></i></div>
-							management
-							<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-						</a>
-						<div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
-							data-bs-parent="#sidenavAccordion">
-							<nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-								<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-									data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-									aria-controls="pagesCollapseAuth">
-									<div class="sb-nav-link-icon"><i class="fa-solid fa-chart-pie"></i></div>
-									Sales Status
-									<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-								</a>
-								<div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
-									data-bs-parent="#sidenavAccordionPages">
-									<nav class="sb-sidenav-menu-nested nav">
-										<a class="nav-link" href="#">today</a>
-										<a class="nav-link" href="#">week</a>
-										<a class="nav-link" href="#">month</a>
-									</nav>
-								</div>
-								<a class="nav-link" href="/shop/branchInfo">
-									<div class="sb-nav-link-icon"><i class="fa-solid fa-circle-info"></i></div>
-									지점 정보 확인
-								</a>
-							</nav>
-						</div>
-					<div th:if="${session.authType == '00'}">
-						<div class="sb-sidenav-menu-heading">admin</div>
-						<a class="nav-link" href="/shop/productAllList">
-							<div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
-							전체 재고 확인 및 등록
-						</a>
-						<a class="nav-link" href="/shop/branchList">
-							<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-							지점별 정보 확인
-						</a>
-						<a class="nav-link" href="#">
-							<div class="sb-nav-link-icon"><i class="fa-solid fa-chart-line"></i></div>
-							지점별 매출 확인
-						</a>
+								지점 재고 조회
+							</a>
+						<div th:if="${session.authType == '00'}">
+							<div class="sb-sidenav-menu-heading">admin</div>
+							<a class="nav-link" href="/shop/productAllList">
+								<div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+								전체 재고 확인 및 등록
+							</a>
+							<a class="nav-link" href="/shop/branchList">
+								<div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+								지점별 정보 확인
+							</a>
 						</div>
 					</div>
 				</div>
@@ -159,6 +113,9 @@
 	<script src="/assets/demo/chart-bar-demo.js"></script>
 	<script src="/js/simple-datatables.min.js" crossorigin="anonymous"></script>
 	<script src="/js/datatables-simple-demo.js"></script>
+	<script src="/js/member.js"></script>
+	<script src="/js/branch.js"></script>
+	<script src="/js/product.js"></script>
 </body>
 
 </html>

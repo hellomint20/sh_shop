@@ -1,9 +1,9 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.service.product.ProductService;
@@ -31,6 +30,7 @@ public class ProductController {
 
 	@GetMapping("/productAllList") // 전체 재고 목록
 	public String productAllList(Model model) {
+		LOGGER.info("[ ::: shop/productAllList ::: ]");
 		List<Map<String, Object>> list = ps.productAllList(); // 전체 품목 목록 가져오기
 		model.addAttribute("list", list);
 		return "shop/product/productAllList";
@@ -61,13 +61,20 @@ public class ProductController {
 		return mav;
 	}
 
-	@GetMapping("/productList") // 지점별 재고 목록
-	public String productList(HttpSession session, Model model, HttpServletResponse res) throws Exception {
-		Map<String, Object> stock = ps.productList(session.getAttribute("shopNo").toString());
-		// Map<String, Object> pro = ps.productgetList(stock.get("item_no").toString());
+	@GetMapping("/productGetList") // 지점별 재고 목록
+	public String productList(HttpSession session, Model model) {
+		LOGGER.info("[ ::: shop/productGetList ::: ]");
+		List<Map<String, Object>> stock = new ArrayList<>();
+		List<Map<String, Object>> product = new ArrayList<>();
+		try {
+			stock = ps.stockList(session.getAttribute("shopNo").toString());
+			product = ps.productGetList(session.getAttribute("shopNo").toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		model.addAttribute("stock", stock);
-		// model.addAttribute("pro", pro);
-		return "shop/product/productList";
+		model.addAttribute("product", product);
+		return "shop/product/productGetList";
 	}
 
 	@PostMapping("/productModi")
@@ -91,7 +98,7 @@ public class ProductController {
 		int result = 99;
 
 		try {
-			// result = ps.productModify(map);
+			result = ps.productModify(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -99,14 +106,35 @@ public class ProductController {
 		return mav;
 	}
 
-	@GetMapping("/productInfo") // 재고 상세정보
-	public String productInfo() {
-		return "shop/product/productInfo";
+	@PostMapping("/stockCntModiDo")
+	public ModelAndView stockCntModiDo(@RequestBody Map<String, Object> map) {
+		LOGGER.info("[ ::: shop/stockCntModiDo ::: ]");
+		ModelAndView mav = new ModelAndView("jsonView");
+
+		int result = 99;
+
+		try {
+			result = ps.stockCntModi(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mav.addObject("result", result);
+		return mav;
 	}
 
-	@GetMapping("/sellRefund") // 재고 판매/환불
-	public String sell() {
-		return "shop/product/sellRefund";
-	}
+	@PostMapping("/itemCntModiDo")
+	public ModelAndView itemCntModiDo(@RequestBody Map<String, Object> map) {
+		LOGGER.info("[ ::: shop/itemCntModiDo ::: ]");
+		ModelAndView mav = new ModelAndView("jsonView");
 
+		int result = 99;
+
+		try {
+			result = ps.itemCntModiDo(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mav.addObject("result", result);
+		return mav;
+	}
 }

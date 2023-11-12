@@ -55,9 +55,7 @@ function memberModify(){ //수정 내용 DB 등록
 		let arr = $("#memberModify").serializeArray();
 		arr.forEach( data => {
 			form[data.name] = data.value;
-		});
-		console.log(form) 
-		
+		});		
 		
 		$.ajax({
 			url : "/shop/memberModify", type : "post",
@@ -65,8 +63,6 @@ function memberModify(){ //수정 내용 DB 등록
 			contentType : "application/json; charset=utf-8",
 			dataType : "json",
 			success : function(result){
-				console.log("통신 성공");
-				console.log(result);
 				if(result == '1'){
 					 alert("개인 정보 수정 성공");
 			 		location.href="/shop/memberInfo";

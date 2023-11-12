@@ -27,7 +27,7 @@
 		where shop_no=${shopNo}
 	</select>
 	
-	<update id="branchModify">
+	<update id="branchModiDo">
 		update sh_shop 
 			set shop_name=#{shopName}, shop_tel=#{shopTel}, shop_addr=#{shopAddr}, 
 				manager_name=#{managerName}, manager_hp=#{managerHp} where shop_no=#{shopNo}

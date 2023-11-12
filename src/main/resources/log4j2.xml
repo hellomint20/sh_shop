@@ -1,33 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="log_path" value="D:/Gradle_Project/logs" />
-    <property name="log_path_name" value="${log_path}/shShopLogFile.log" />
+	<property name="log_path" value="D:/Gradle_Project/logs" />
+	<property name="log_path_name" value="${log_path}/shShopLogFile.log" />
 
-    <!-- 파일 생성하는 appender-->
-    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log_path_name}</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <!-- rollover daily -->
-            <fileNamePattern>${log_path_name}.%d{yyyyMMdd}.%i </fileNamePattern>
-            <!-- each file should be at most 100MB, keep 60 days worth of history, but at most 10GB -->
-            <maxFileSize>100MB</maxFileSize>
-            <maxHistory>60</maxHistory>
-            <totalSizeCap>10GB</totalSizeCap>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%-4relative %date [%thread] %-5level %C %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
+	<!-- 파일 생성하는 appender -->
+	<appender name="ROLLING"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log_path_name}</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${log_path_name}.%d{yyyyMMdd}.%i </fileNamePattern>
+			<!-- each file should be at most 100MB, keep 60 days worth of history, 
+				but at most 10GB -->
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>60</maxHistory>
+			<totalSizeCap>10GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%-4relative %date [%thread] %-5level %C %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
 
-    <!-- 콘솔에 보여주는 appender-->
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <Pattern>%date [%thread] %-5level %C %logger{36} - %msg%n</Pattern>
-        </layout>
-    </appender>
+	<!-- 콘솔에 보여주는 appender -->
+	<appender name="console"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date [%thread] %-5level %C %logger{36} - %msg%n</Pattern>
+		</layout>
+	</appender>
 
-    <root level="info">
-        <appender-ref ref="console" />
-        <appender-ref ref="ROLLING" />
-    </root>
+
+	<property name="XSS_filter_log_path" value="D:/Gradle_Project/logs/XSS_filter_log" />
+	<property name="XSS_filter_log_path_name" value="${XSS_filter_log_path}/XSSFilter.log" />
+	
+	<!-- filter Log -->
+	<appender name="XSS_filter_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file></file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${XSS_filter_log_path_name}.%d{yyyyMMdd}.%i </fileNamePattern>
+				but at most 10GB -->
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>60</maxHistory>
+			<totalSizeCap>10GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%-4relative %date [%thread] %-5level %C %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<root level="info">
+		<appender-ref ref="console" />
+		<appender-ref ref="ROLLING" />
+		<appender-ref ref="XSS_filter_log" />
+	</root>
 </configuration>

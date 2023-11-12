@@ -3,18 +3,13 @@
 
 <mapper namespace="com.example.demo.mapper.ProductMapper">
 
-	<resultMap type="com.example.demo.DTO.ShProductDTO"
-		id="product">
-
-	</resultMap>
-
 	<select id="productAllList" resultType="map">
 		select A.*,
 			(select code_desc1 from sh_code B where A.item_category =
 				B.code_no and B.code_type ='item_category') as item_category_desc,
 			(select code_desc1 from sh_code B where A.item_state = B.code_no and
 				B.code_type ='item_state') as item_state_desc
-		from sh_product A;
+		from sh_product A
 	</select>
 
 	<insert id="productRegister">
@@ -33,7 +28,7 @@
 				(select code_desc1 from sh_code where code_type ='item_category' and code_no = P.item_category) as item_category, 
 				item_desc, item_date, 
 				(select code_desc1 from sh_code where code_type ='item_state' and code_no = P.item_state) as item_state  
-		from sh_product P where item_no=#{itemNo};
+		from sh_product P where item_no=#{itemNo}
 	</select>
 	
 	<update id="productModify">
@@ -41,12 +36,26 @@
 			item_category = (select code_no from sh_code where code_type ='item_category' and code_desc1 =#{itemCategory}),
 			item_desc = #{itemDesc},
 			item_state = (select code_no from sh_code where code_type ='item_state' and	code_desc1 = #{itemState})
-		where item_no = #{itemNo};
+		where item_no = #{itemNo}
 	</update>
 
-	<select id="productList" resultType="map">
-		select * from sh_stock where
-		shop_no=#{shopNo}
+	<select id="stockList" resultType="map">
+		select ss.*, sp.item_price ,
+			(select code_desc1 from sh_code sc where code_type='item_category' and code_no = sp.item_category) as item_category,
+			(select code_desc1 from sh_code sc where code_type='item_state' and code_no = sp.item_state) as item_state
+		from sh_stock ss, sh_product sp
+			where shop_no =#{shopNo} and ss.item_no = sp.item_no
+		order by item_cnt desc, item_no asc
+	</select>
+	
+	<select id="productGetList">
+		SELECT sp.*, sc1.code_desc1 as code_category , sc2.code_desc1 as code_state 
+			FROM sh_product sp
+		LEFT JOIN sh_stock ss ON sp.item_no = ss.item_no AND ss.shop_no = #{shopNo}
+			LEFT JOIN sh_code sc1 ON sc1.code_type = 'item_category' AND sc1.code_no = sp.item_category
+		LEFT JOIN sh_code sc2 ON sc2.code_type = 'item_state' AND sc2.code_no = sp.item_state
+			WHERE ss.item_no IS NULL 
+		order by sp.item_no asc
 	</select>
 
 	<select id="itemCategory" resultType="map">
@@ -60,5 +69,18 @@
 		from sh_code
 		where code_type ='item_state'
 	</select>
+	
+	<update id="stockCntModi">
+		update sh_stock
+			set item_cnt=${itemCnt}, input_date=now()
+		where item_no =#{itemNo} and shop_no=#{shopNo}
+	</update>
+	
+	<insert id="itemCntModiDo">
+		insert into 
+			sh_stock (item_no, shop_no, item_cnt, input_date)
+		values
+			(#{itemNo}, #{shopNo}, ${itemCnt}, now())
+	</insert>
 
 </mapper>

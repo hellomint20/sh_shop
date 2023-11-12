@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+	
+	<main layout:fragment="content">
+		<div class="container-fluid px-4">
+			<h1 class="mt-4"><span th:text="${session.memberName}"></span>&nbsp; 님의 지점 재고 목록</h1>
+			<input type="hidden" id="shopNo" th:value="${session.shopNo}">
+			<br><br>
+			<div class="card mb-4">
+				<div class="card-header">
+					<i class="fas fa-table me-1"></i>
+				</div>
+				<div class="card-body">
+					<table id="datatablesSimple">
+						<thead>
+							<tr>
+								<th>item_no</th>
+								<th>item_cnt</th>
+								<th>item_price</th>
+								<th>item_category</th>
+								<th>item_date</th>
+								<th>item_state</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>item_no</th>
+								<th>item_cnt</th>
+								<th>item_price</th>
+								<th>item_category</th>
+								<th>item_date</th>
+								<th>item_state</th>
+							</tr>
+						</tfoot>
+						<tbody>
+							<tr th:each="stock : ${stock}">
+								<td th:text="${stock['item_no']}"></td>
+								<td>
+									<div th:id="${stock['item_no']}">
+										<span th:id="'cnt'+${stock['item_no']}" th:text="${stock['item_cnt']}"></span>
+										<button class="btn btn-sm btn-outline-info" style="float: right;" 
+											th:myName="${stock['item_no']}" onclick="stockCntModi(this.getAttribute('myName'));">수정</button>
+									</div>
+								</td>
+								<td th:text="${stock['item_price']}"></td>
+								<td th:text="${stock['item_category']}"></td>
+								<td th:text="${stock['input_date']}"></td>
+								<td th:text="${stock['item_state']}"></td>
+							</tr>
+							<tr th:each="product : ${product}">
+								<td th:text="${product['item_no']}"></td>
+								<td>
+									<div th:id="${product['item_no']}">
+										<span th:id="'cnt'+${product['item_no']}">0</span>
+										<button class="btn btn-sm btn-outline-info" style="float: right;"
+											th:myName="${product['item_no']}" onclick="itemCntModi(this.getAttribute('myName'));">수정</button>
+									</div>
+								</td>
+								<td th:text="${product['item_price']}"></td>
+								<td th:text="${product['code_category']}"></td>
+								<td th:text="${product['item_date']}"></td>
+								<td th:text="${product['code_state']}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</main>
+</html>

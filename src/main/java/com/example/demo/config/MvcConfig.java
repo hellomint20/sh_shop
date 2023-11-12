@@ -6,9 +6,9 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Configuration
 public class MvcConfig {
-	
-	 @Bean(name="jsonView")
-	 MappingJackson2JsonView jsonView() {
-	     return new MappingJackson2JsonView();
-	 }
+
+	@Bean(name = "jsonView")
+	MappingJackson2JsonView jsonView() {
+		return new MappingJackson2JsonView();
+	}
 }
