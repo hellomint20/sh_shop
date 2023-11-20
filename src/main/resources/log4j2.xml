@@ -51,10 +51,31 @@
 			</pattern>
 		</encoder>
 	</appender>
+	
+	<property name="scheduler_log_path" value="D:/Gradle_Project/logs/Scheduler" />
+	<property name="scheduler_log_path_name" value="${scheduler_log_path}/Scheduler.log" />
+	
+	<!-- filter Log -->
+	<appender name="scheduler_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file></file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${scheduler_log_path_name}.%d{yyyyMMdd}.%i </fileNamePattern>
+				but at most 10GB -->
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>60</maxHistory>
+			<totalSizeCap>10GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%-4relative %date [%thread] %-5level %C %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
 
 	<root level="info">
 		<appender-ref ref="console" />
 		<appender-ref ref="ROLLING" />
 		<appender-ref ref="XSS_filter_log" />
+		<appender-ref ref="scheduler_log" />
 	</root>
 </configuration>
