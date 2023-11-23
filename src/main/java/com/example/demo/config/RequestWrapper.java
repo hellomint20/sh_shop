@@ -93,6 +93,7 @@ public class RequestWrapper extends HttpServletRequestWrapper {
 			}
 		}
 		body = stringBuilder.toString();
+		//{"itemName":"select","itemPrice":"1000","itemDesc":"delete","itemCategory":"신발","itemState":"중지","itemNo":"0204"}
 		filterLog.info("[ ::: /shop/productModiDo - input 값 확인 : "+body+" ::: ]");
 		return body;	
 		}

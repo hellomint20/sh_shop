@@ -16,7 +16,6 @@ public class scheduler {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 		String strDate = sdf.format(now);
-		System.out.println("[ ::: 스케줄러 실행 ::: ]"+strDate);
 		schedulerLog.info("[ ::: 스케줄러 실행 ::: ]"+strDate);
 	}
 }

@@ -11,9 +11,14 @@ public class webConfig implements WebMvcConfigurer {
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		 registry.addInterceptor(new interceptor())
+		 registry.addInterceptor(authInterceptor())
 	 		.excludePathPatterns("/css/**", "/images/**", "/js/**");
 	}
+	
+    @Bean
+    interceptor authInterceptor(){
+    	return new interceptor();
+    }
 	
 	@Bean(name = "jsonView")
 	MappingJackson2JsonView jsonView() {

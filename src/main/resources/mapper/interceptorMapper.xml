@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.interceptorMapper">	
+
+	<insert id="insertInterId">
+		insert into 
+			sh_interceptor(url, port, ip, user_id, regDt)
+		values
+			(#{url}, #{port}, #{ip}, #{userId}, now())
+	</insert>
+	
+	<insert id="insertInter">
+		insert into 
+			sh_interceptor(url, port, ip, regDt)
+		values
+			(#{url}, #{port}, #{ip}, now())
+	</insert>
+
+</mapper>
