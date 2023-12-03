@@ -26,22 +26,22 @@ public class interceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		LOGGER.info("[ ::: Interceptor preHandle ::: ]");
 		HttpSession session = request.getSession();
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("url", request.getRequestURI().toString());
-		map.put("port",Integer.toString(request.getServerPort()));
-		map.put("ip",request.getRemoteAddr().toString());
-		
-		if(session.getAttribute("memberId") == null) {
-			is.insertInter(map);
-		}else {
-			map.put("userId", session.getAttribute("memberId").toString());
-			is.insertInterId(map);
-		}
 
 		// 요청 URL 
 		String url = request.getRequestURI();
-		
+		if(!(url.equals("/favicon.ico") || url.equals("/error"))) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("url", url);
+			map.put("port",Integer.toString(request.getServerPort()));
+			map.put("ip",request.getRemoteAddr().toString());
+			
+			if(session.getAttribute("memberId") == null) {
+				is.insertInter(map);
+			}else {
+				map.put("userId", session.getAttribute("memberId").toString());
+				is.insertInterId(map);
+			}
+		}
 		// 아래 URL이 아니라면 로그인 체크
 		if((url.equals("/shop/productAllList"))){
 			if(session.getAttribute("memberId") == null) {

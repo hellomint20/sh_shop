@@ -35,6 +35,9 @@ dependencies {
 	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1")
+	implementation("org.springframework.boot:spring-boot-starter-aop")
+	implementation ("net.javacrumbs.shedlock:shedlock-spring:5.1.0")
+	
 }
 
 tasks.withType<Test> {

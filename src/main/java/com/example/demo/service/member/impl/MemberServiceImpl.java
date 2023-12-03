@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.example.demo.common.GetMessage;
 import com.example.demo.mapper.MemberMapper;
 import com.example.demo.service.member.MemberService;
@@ -26,6 +28,7 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.authTypeList();
 	}
 	
+	@Transactional(rollbackForClassName = {})
 	public int register(Map<String, Object> map) { //회원가입
 		
 		//지점번호 가져오기
@@ -40,8 +43,7 @@ public class MemberServiceImpl implements MemberService{
 				map.put("authType", authType.get(i).get("code_no"));
 			}
 		}
-		
-		System.out.println(map);
+
 		int result = 0;
 		
 		try { //DB 넘어가는 
