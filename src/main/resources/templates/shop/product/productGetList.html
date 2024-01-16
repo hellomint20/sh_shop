@@ -19,6 +19,8 @@
 								<th>item_cnt</th>
 								<th>item_price</th>
 								<th>item_category</th>
+								<th>item_name</th>
+								<th>item_desc</th>
 								<th>item_date</th>
 								<th>item_state</th>
 							</tr>
@@ -29,6 +31,8 @@
 								<th>item_cnt</th>
 								<th>item_price</th>
 								<th>item_category</th>
+								<th>item_name</th>
+								<th>item_desc</th>
 								<th>item_date</th>
 								<th>item_state</th>
 							</tr>
@@ -38,14 +42,16 @@
 								<td th:text="${stock['item_no']}"></td>
 								<td>
 									<div th:id="${stock['item_no']}">
-										<span th:id="'cnt'+${stock['item_no']}" th:text="${stock['item_cnt']}"></span>
+										<span th:id="'cnt'+${stock['item_no']}" th:text="${#numbers.formatInteger(stock['item_cnt'], 0, 'COMMA')}"></span>
 										<button class="btn btn-sm btn-outline-info" style="float: right;" 
 											th:myName="${stock['item_no']}" onclick="stockCntModi(this.getAttribute('myName'));">수정</button>
 									</div>
 								</td>
-								<td th:text="${stock['item_price']}"></td>
+								<td th:text="${#numbers.formatInteger(stock['item_price'], 0, 'COMMA')}"></td>
 								<td th:text="${stock['item_category']}"></td>
-								<td th:text="${stock['input_date']}"></td>
+								<td th:text="${stock['item_name']}"></td>
+								<td th:text="${stock['item_desc']}"></td>
+								<td th:text="${stock['item_day']}"></td>
 								<td th:text="${stock['item_state']}"></td>
 							</tr>
 							<tr th:each="product : ${product}">
@@ -57,9 +63,11 @@
 											th:myName="${product['item_no']}" onclick="itemCntModi(this.getAttribute('myName'));">수정</button>
 									</div>
 								</td>
-								<td th:text="${product['item_price']}"></td>
+								<td th:text="${#numbers.formatInteger(product['item_price'], 0, 'COMMA')}"></td>
 								<td th:text="${product['code_category']}"></td>
-								<td th:text="${product['item_date']}"></td>
+								<td th:text="${product['item_name']}"></td>
+								<td th:text="${product['item_desc']}"></td>
+								<td th:text="${product['item_day']}"></td>
 								<td th:text="${product['code_state']}"></td>
 							</tr>
 						</tbody>

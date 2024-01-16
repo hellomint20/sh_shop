@@ -13,5 +13,6 @@ public interface MemberMapper {
 	public Map<String, Object> getShopNo(String shopName); //이름으로 번호 가져오기
 	public Map<String, Object> getShopName(String shopNo); //번호로 이름 가져오기
 	public int memberModify(Map<String, Object> map); //개인정보 수정
-	public int memberDelete(String id); //회원 탈퇴
+	public int memberDelete(String memberId); //회원 삭제
+	public List<Map<String, Object>> memberList(); //직원 리스트
 }

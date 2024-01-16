@@ -57,8 +57,8 @@ function stockCntModi(itemNo){
 	let cnt = document.getElementById('cnt'+itemNo).innerHTML;
 	var html = 
 	`
-	<input type="hidden" id="itemNo" value="${itemNo}">
-	<input type="text" name="cnt" id="cnt" value="${cnt}" style="width:50%;">
+	<input type="hidden" id="itemNo" value="${itemNo}" />
+	<input type="text" name="cnt" id="cnt" value="${cnt}" style="width:50%;"/>
 	<button class="btn btn-sm btn-outline-secondary" style="float: right;" 
 		 onclick="stockCntModiDo();">확인</button>`;
 	stock.innerHTML = html;
@@ -101,8 +101,8 @@ function itemCntModi(itemNo){
 	let cnt = document.getElementById('cnt'+itemNo).innerHTML;
 	var html = 
 	`
-	<input type="hidden" id="itemNo" value="${itemNo}">
-	<input type="text" name="cnt" id="cnt" value="${cnt}" style="width:50%;">
+	<input type="hidden" id="itemNo" value="${itemNo}" />
+	<input type="text" name="cnt" id="cnt" value="${cnt}" style="width:50%;"/>
 	<button class="btn btn-sm btn-outline-secondary" style="float: right;" 
 		 onclick="itemCntModiDo();">확인</button>`;
 	stock.innerHTML = html;

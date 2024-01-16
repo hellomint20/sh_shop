@@ -1,9 +1,8 @@
 package com.example.demo.controller;
 
-import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +29,7 @@ public class MemberController {
 		model.addAttribute("authType", ms.authTypeList());//관리자 등급 가져오기
 		return "shop/member/memberRegister";
 	}
+	
 	@ResponseBody
 	@RequestMapping(value ="register/do", method = RequestMethod.POST)
 	public String register(@RequestBody Map<String, Object> map){
@@ -37,10 +37,8 @@ public class MemberController {
 		try {
 			result = Integer.toString(ms.register(map));
 		} catch (Exception e) {
-			System.out.println("con");
 			e.printStackTrace();
 		}
-		System.out.println("확인"+result);
 		return result;
 	}
 
@@ -50,26 +48,36 @@ public class MemberController {
 		model.addAttribute("dto", map);
 		return "shop/member/memberInfo";
 	}
+	
 	@ResponseBody
 	@PostMapping("memberModify") //회원 개인 정보 수정 DB 등록
 	public String memberModify(@RequestBody Map<String, Object> map)  {
-		System.out.println(map);
 		String result = "";
 		try {
 			result = Integer.toString(ms.memberModify(map));
 		} catch (Exception e) {
-			System.out.println("con");
 			e.printStackTrace();
 		}
-		System.out.println("확인"+result);
-		
 		return result;
 	}
-	@GetMapping("memberDelete") //회원 탈퇴
-	public void memberDelete(HttpSession session, HttpServletResponse res) throws Exception {
-		String msg = ms.memberDelete(session);
-		res.setContentType("text/html; charset=utf-8");
-		PrintWriter out = res.getWriter();
-		out.print(msg);
+	
+	@ResponseBody
+	@PostMapping("memberDelete") //회원 탈퇴
+	public String memberDelete(@RequestBody String id) {
+		System.out.println("con "+id);
+		String result = "";
+		try {
+			result = Integer.toString(ms.memberDelete(id));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@GetMapping("memberList") //직원 리스트
+	public String memberList(Model model) {
+		List<Map<String, Object>> map = ms.memberList();
+		model.addAttribute("list", map);
+		return "shop/member/memberList";
 	}
 }

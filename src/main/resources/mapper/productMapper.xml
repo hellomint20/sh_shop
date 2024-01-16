@@ -4,7 +4,7 @@
 <mapper namespace="com.example.demo.mapper.ProductMapper">
 
 	<select id="productAllList" resultType="map">
-		select A.*,
+		select A.*,  date_format(A.item_date, '%Y-%m-%d') as item_day,
 			(select code_desc1 from sh_code B where A.item_category =
 				B.code_no and B.code_type ='item_category') as item_category_desc,
 			(select code_desc1 from sh_code B where A.item_state = B.code_no and
@@ -40,7 +40,7 @@
 	</update>
 
 	<select id="stockList" resultType="map">
-		select ss.*, sp.item_price ,
+		select ss.*, sp.item_price, sp.item_name, sp.item_desc, date_format(sp.item_date, '%Y-%m-%d') as item_day,
 			(select code_desc1 from sh_code sc where code_type='item_category' and code_no = sp.item_category) as item_category,
 			(select code_desc1 from sh_code sc where code_type='item_state' and code_no = sp.item_state) as item_state
 		from sh_stock ss, sh_product sp
@@ -49,7 +49,7 @@
 	</select>
 	
 	<select id="productGetList">
-		SELECT sp.*, sc1.code_desc1 as code_category , sc2.code_desc1 as code_state 
+		SELECT sp.*, date_format(sp.item_date, '%Y-%m-%d') as item_day, sc1.code_desc1 as code_category , sc2.code_desc1 as code_state 
 			FROM sh_product sp
 		LEFT JOIN sh_stock ss ON sp.item_no = ss.item_no AND ss.shop_no = #{shopNo}
 			LEFT JOIN sh_code sc1 ON sc1.code_type = 'item_category' AND sc1.code_no = sp.item_category

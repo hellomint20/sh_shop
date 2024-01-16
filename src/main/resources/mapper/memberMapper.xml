@@ -50,6 +50,23 @@
 	
 	<delete id="memberDelete">
 		delete from sh_member 
-			where member_id=#{id}
+			where member_id=${memberId}
 	</delete>
+	
+		
+	<select id="memberList" resultType="map">
+	select 
+		sm.* , sc.code_desc1 as auth_desc, ss.shop_name as shop_name
+	from 
+		sh_member sm
+	LEFT JOIN 
+		sh_code sc ON sc.code_type = 'auth_type'
+	AND sc.code_no = sm.auth_type
+	LEFT join 
+		sh_shop ss on ss.shop_no = sm.shop_no
+	where NOT 
+		sc.code_no IN ('00')
+	order by 
+		ss.shop_no asc, auth_desc asc, sm.member_name asc;
+	</select>
 </mapper>

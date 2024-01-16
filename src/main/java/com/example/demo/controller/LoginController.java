@@ -29,7 +29,6 @@ public class LoginController {
 	@ResponseBody //header 속성 대신 사용 //produces : 반환 타입 지정??
 	@PostMapping(value = "login_chk")
 	public String loginChk(@RequestBody Map<String, Object> map, HttpSession session) {
-		System.out.println("loginChk "+ map);
 		String result = "";
 		result = ls.loginChk(map, session);
 		System.out.println("확인"+result);

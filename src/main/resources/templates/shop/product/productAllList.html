@@ -28,10 +28,10 @@
 							<tr th:each="list : ${list}">
 								<td th:text="${list['item_no']}">상품번호</td>
 								<td th:text="${list['item_name']}">상품명</td>
-								<td th:text="${list['item_price']}">상품가격</td>
+								<td th:text="${#numbers.formatInteger(list['item_price'], 0, 'COMMA')}">상품가격</td>
 								<td th:text="${list['item_category_desc']}">상품 카테고리</td>
 								<td th:text="${list['item_desc']}">상품 설명</td>
-								<td th:text="${list['item_date']}">상품 등록날짜</td>
+								<td th:text="${list['item_day']}">상품 등록날짜</td>
 								<td th:text="${list['item_state_desc']}">판매 상태</td>
 								<td>
 									<button class="btn btn-info btn-sm" type="submit" th:myName="${list['item_no']}"

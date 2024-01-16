@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Login - SB Admin</title>
+        <title>SH SHOP - Product Register</title>
         <link href="/css/styles.css" rel="stylesheet" />
         <script src="/js/all.js" crossorigin="anonymous"></script>
  		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -89,7 +89,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <input class="form-control" id="inputItemPrice" name="itemPrice" type="text" placeholder="Enter your price" />
+                                                        <input class="form-control" id="inputItemPrice" name="itemPrice" type="text" placeholder="Enter your price" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\d(?=(?:\d{3})+$)/g, '$&,')"/>
                                                         <label for="inputItemPrice">상품 가격</label>
                                                     </div>
                                                 </div>
@@ -133,15 +133,11 @@
                 </main>
             </div>
             <div id="layoutAuthentication_footer">
-                <footer class="py-4 bg-light mt-auto">
+               <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
+                            <div class="text-muted">Copyright &copy; SH SHOP 2024</div>
+                            <div class="text-muted">All Rigths Reserved.</div>
                         </div>
                     </div>
                 </footer>

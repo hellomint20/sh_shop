@@ -32,14 +32,14 @@ function memberModifyPage(){ //수정 폼으로 변경
 									<div class="col-md-6">
 										<div class="form-floating mb-3 mb-md-0">
 											<input class="form-control" id="memberInfoShopName" name="shopNo" type="text"
-												  value=${memberInfoShopName} />
+												  value=${memberInfoShopName} readonly/>
 											<label for="memberInfoShopName">지점명</label>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-floating mb-3 mb-md-0">
 											<input class="form-control" id="memberInfoAuthType" name="authType"
-												type="text" value=${memberInfoAuthType} />
+												type="text" value=${memberInfoAuthType} readonly/>
 											<label for="memberInfoAuthType">관리자 등급</label>
 										</div>
 									</div>
@@ -75,4 +75,32 @@ function memberModify(){ //수정 내용 DB 등록
 				alert("통신 문제 발생")
 			}
 		})
+}
+
+function memberDelete(memberId) { //삭제	 
+	var result = confirm("정말로 삭제 하시겠습니까?");
+
+	if (result == true) {
+		$.ajax({
+			url: "/shop/memberDelete", type: "post",
+			data: JSON.stringify(memberId),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function(result) {
+				if (result == '1') {
+					alert("삭제 하였습니다.");
+					location.href = "/shop/memberList";
+				} else if (result == '0') {
+					alert("삭제 실패");
+					location.href = "/shop/memberList";
+				}
+			},
+			error: () => {
+				alert("통신 문제 발생")
+			}
+		})
 	}
+	else {
+		alert("취소를 눌렀습니다.");
+	}
+}

@@ -1,8 +1,11 @@
 package com.example.demo.service.member.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.print.attribute.PrintJobAttribute;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,25 +67,27 @@ public class MemberServiceImpl implements MemberService{
 	public int memberModify(Map<String, Object> map) { //개인정보 수정
 		Map<String, Object> shopNo = mapper.getShopNo(map.get("shopNo").toString()); //지점번호 가져오기
 		map.put("shopNo", shopNo.get("shop_no"));
-		
-		System.out.println(map);
-		
+				
 		int result = 0;
 		result = mapper.memberModify(map);
 		return result;
 	}
-	public String memberDelete(HttpSession session) { //회원 탈퇴
+	public int memberDelete(String id) { //회원 삭제
 		int result = 0;
-		result = mapper.memberDelete(session.getAttribute("memberId").toString());
-		
-		if(result == 1) { //수정 성공
-			session.invalidate(); //세션 삭제
-			msg = "탈퇴 되었습니다";
-			url = "/";
-		}else { //수정 실패
-			msg = "문제 발생";
-			url = "/shop/memberInfo";
+		try {		
+			result = mapper.memberDelete(id);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return GetMessage.getMessage(msg, url);
+		return result;
+	}
+	public List<Map<String, Object>> memberList(){ //직원 리스트
+		List<Map<String, Object>> list = new ArrayList<>();
+		try {
+			list = mapper.memberList();
+		} catch (Exception e) {
+			e.printStackTrace();		
+			}
+		return list;
 	}
 }

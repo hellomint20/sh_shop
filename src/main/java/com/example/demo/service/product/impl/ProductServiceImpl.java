@@ -1,5 +1,6 @@
 package com.example.demo.service.product.impl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,13 +24,11 @@ public class ProductServiceImpl implements ProductService {
 		List<Map<String, Object>> list = new ArrayList<>();
 
 		try {
-			// throw new IOException();
+			//throw new IOException();
 			list = mapper.productAllList();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Running read productServiceImpl productAllList...");
 		}
-
 		return list;
 	}
 

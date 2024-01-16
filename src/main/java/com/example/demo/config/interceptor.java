@@ -49,6 +49,14 @@ public class interceptor implements HandlerInterceptor{
 				return false;
 			}
 		}
+		
+		if((url.equals("/shop/productGetList"))) {
+			if(session.getAttribute("memberId") == null) {
+				response.sendRedirect("/shop/login");
+				return false;
+			}
+		}
+		
 		return HandlerInterceptor.super.preHandle(request, response, handler);
 	}
 
